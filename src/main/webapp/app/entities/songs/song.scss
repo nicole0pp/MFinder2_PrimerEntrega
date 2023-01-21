@@ -1,0 +1,24 @@
+* {
+  color: aliceblue;
+  font-family: sans-serif;
+}
+div.card-body {
+  border: 1px solid rgb(132, 132, 132);
+}
+span#title-field,
+h3.card-title {
+  font-weight: bold;
+}
+a#link-open {
+  color: rgb(180, 182, 184);
+}
+
+// Buttons
+div.card-body > div.btn-group {
+  display: block;
+  margin: 2em;
+}
+div.btn-group > button {
+  color: aliceblue;
+  padding: 1em;
+}

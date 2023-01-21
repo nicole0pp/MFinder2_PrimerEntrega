@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-albums-heading" jhiTranslate="mFinder2App.albums.home.createOrEditLabel">Create or edit a Albums</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!albums.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.albums.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.albums.picture" for="field_picture">Picture</label>
+                    <div>
+                        <div *ngIf="editForm.get('picture').value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('pictureContentType').value, editForm.get('picture').value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{editForm.get('pictureContentType').value}}, {{byteSize(editForm.get('picture').value)}}</span>
+                            <button type="button" (click)="editForm.patchValue({picture: null});editForm.patchValue({pictureContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_picture" (change)="setFileData($event, 'picture', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="picture" id="field_picture"
+                           formControlName="picture"/>
+                    <input type="hidden" class="form-control" name="pictureContentType" id="field_pictureContentType"
+                           formControlName="pictureContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.albums.publicationDate" for="field_publicationDate">Publication Date</label>
+                    <div class="input-group">
+                        <input id="field_publicationDate" type="text" class="form-control" name="publicationDate" ngbDatepicker  #publicationDateDp="ngbDatepicker" formControlName="publicationDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="publicationDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

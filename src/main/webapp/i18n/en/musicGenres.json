@@ -1,0 +1,22 @@
+{
+  "mFinder2App": {
+    "musicGenres": {
+      "home": {
+        "title": "Music Genres",
+        "createLabel": "Create a new Music Genres",
+        "createOrEditLabel": "Create or edit a Music Genres"
+      },
+      "created": "A new Music Genres is created with identifier {{ param }}",
+      "updated": "A Music Genres is updated with identifier {{ param }}",
+      "deleted": "A Music Genres is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Music Genres {{ id }}?"
+      },
+      "detail": {
+        "title": "Music Genres"
+      },
+      "name": "Name",
+      "type": "Type"
+    }
+  }
+}

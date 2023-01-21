@@ -1,0 +1,22 @@
+{
+  "mFinder2App": {
+    "listDetails": {
+      "home": {
+        "title": "List Details",
+        "createLabel": "Create a new List Details",
+        "createOrEditLabel": "Create or edit a List Details"
+      },
+      "created": "A new List Details is created with identifier {{ param }}",
+      "updated": "A List Details is updated with identifier {{ param }}",
+      "deleted": "A List Details is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete List Details {{ id }}?"
+      },
+      "detail": {
+        "title": "List Details"
+      },
+      "list": "List",
+      "song": "Song"
+    }
+  }
+}

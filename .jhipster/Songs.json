@@ -1,0 +1,62 @@
+{
+    "name": "Songs",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "picture",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "duration",
+            "fieldType": "Duration"
+        },
+        {
+            "fieldName": "audio",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "artists",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "musicGenres",
+            "otherEntityRelationshipName": "songs",
+            "relationshipName": "musicGenre",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "albums",
+            "otherEntityRelationshipName": "songs",
+            "relationshipName": "album",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "listDetails",
+            "otherEntityName": "listDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20230113162103",
+    "entityTableName": "songs",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,22 @@
+{
+  "mFinder2App": {
+    "reproductionLists": {
+      "home": {
+        "title": "Reproduction Lists",
+        "createLabel": "Crear nuevo Reproduction Lists",
+        "createOrEditLabel": "Crear o editar Reproduction Lists"
+      },
+      "created": "Un nuevo Reproduction Lists ha sido creado con el identificador {{ param }}",
+      "updated": "Un Reproduction Lists ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Reproduction Lists ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Reproduction Lists {{ id }}?"
+      },
+      "detail": {
+        "title": "Reproduction Lists"
+      },
+      "name": "Name",
+      "picture": "Picture"
+    }
+  }
+}

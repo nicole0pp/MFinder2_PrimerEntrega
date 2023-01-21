@@ -1,0 +1,91 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mFinder2App.songs.home.title">Songs</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-songs" [routerLink]="['/songs/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mFinder2App.songs.home.createLabel">
+            Create new Songs
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="row my-6">
+        <div class="card-columns">
+            <div class="card" *ngFor="let songs of songs ;trackBy: trackId">
+                <div class="card-body">
+                    <h3 class="card-title"><span jhiTranslate="mFinder2App.songs.name">Name</span>{{songs.name}}</h3>
+                        <!-- ID -->
+                        <span id="title-field" jhiTranslate="global.field.id">ID</span>
+                        <a [routerLink]="['/songs', songs.id, 'view' ]">{{songs.id}}</a>
+                        <br>
+                        <!-- PICTURE -->
+                        <span id="title-field" jhiTranslate="mFinder2App.songs.picture">Picture</span>
+                        <a id="link-open" *ngIf="songs.picture" (click)="openFile(songs.pictureContentType, songs.picture)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="songs.picture">{{songs.pictureContentType}}, {{byteSize(songs.picture)}}</span> 
+                        <br>
+                        <!-- DURATION -->
+                        <span id="title-field" jhiTranslate="mFinder2App.songs.duration">Duration</span>{{songs.duration}}
+                        <br>
+                        <!-- AUDIO -->
+                        <span id="title-field" jhiTranslate="mFinder2App.songs.audio">Audio</span>
+                        <a id="link-open" *ngIf="songs.audio" (click)="openFile(songs.audioContentType, songs.audio)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="songs.audio">{{songs.audioContentType}}, {{byteSize(songs.audio)}}</span>
+                        <br>
+                        <!-- ARTIST -->
+                        <!-- Poner un link en El nombre del artista(Cuando tennga las relaciones) -->
+                        <span id="title-field" jhiTranslate="mFinder2App.songs.artists">Artists</span>{{songs.artists}}
+                        <br>
+                        <!-- MUSIC GENRE -->
+                        <span id="title-field" jhiTranslate="mFinder2App.songs.musicGenre">Music Genre</span>
+                        <div *ngIf="songs.musicGenreId" id="component-id">
+                            <a [routerLink]="['../music-genres', songs.musicGenreId , 'view' ]" >{{songs.musicGenreId}}</a>
+                        </div>
+                        <br>
+                        <!-- ALBUM -->
+                        <span id="title-field" jhiTranslate="mFinder2App.songs.album">Album</span>
+                        <div *ngIf="songs.albumId" id="component-id">
+                            <a [routerLink]="['../albums', songs.albumId , 'view' ]" >{{songs.albumId}}</a>
+                        </div>
+                        <br>
+                        <!-- DETAILS -->
+                        <span id="title-field" jhiTranslate="mFinder2App.songs.listDetails">List Details</span>
+                        <div *ngIf="songs.listDetailsId" id="component-id">
+                            <a [routerLink]="['../list-details', songs.listDetailsId , 'view' ]" >{{songs.listDetailsId}}</a>
+                        </div>
+                        <br>
+                    <div class="btn-group text-center">
+                        <button type="submit"
+                                [routerLink]="['/songs', songs.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/songs', songs.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'songs', { outlets: { popup: songs.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </div>	
+            </div>
+        </div>
+    
+    <div *ngIf="songs && songs.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

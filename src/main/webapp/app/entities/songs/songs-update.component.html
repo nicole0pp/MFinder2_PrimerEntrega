@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-songs-heading" jhiTranslate="mFinder2App.songs.home.createOrEditLabel">Create or edit a Songs</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!songs.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.picture" for="field_picture">Picture</label>
+                    <div>
+                        <div *ngIf="editForm.get('picture').value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('pictureContentType').value, editForm.get('picture').value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{editForm.get('pictureContentType').value}}, {{byteSize(editForm.get('picture').value)}}</span>
+                            <button type="button" (click)="editForm.patchValue({picture: null});editForm.patchValue({pictureContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_picture" (change)="setFileData($event, 'picture', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="picture" id="field_picture"
+                           formControlName="picture"/>
+                    <input type="hidden" class="form-control" name="pictureContentType" id="field_pictureContentType"
+                           formControlName="pictureContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.duration" for="field_duration">Duration</label>
+                    <input type="number" class="form-control" name="duration" id="field_duration"
+                           formControlName="duration"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.audio" for="field_audio">Audio</label>
+                    <div>
+                        <div *ngIf="editForm.get('audio').value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('audioContentType').value, editForm.get('audio').value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{editForm.get('audioContentType').value}}, {{byteSize(editForm.get('audio').value)}}</span>
+                            <button type="button" (click)="editForm.patchValue({audio: null});editForm.patchValue({audioContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_audio" (change)="setFileData($event, 'audio', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="audio" id="field_audio"
+                           formControlName="audio"/>
+                    <input type="hidden" class="form-control" name="audioContentType" id="field_audioContentType"
+                           formControlName="audioContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.artists" for="field_artists">Artists</label>
+                    <input type="text" class="form-control" name="artists" id="field_artists"
+                           formControlName="artists"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.musicGenre" for="field_musicGenre">Music Genre</label>
+                    <select class="form-control" id="field_musicGenre" name="musicGenre" formControlName="musicGenreId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="musicGenresOption.id" *ngFor="let musicGenresOption of musicgenres; trackBy: trackMusicGenresById">{{musicGenresOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.album" for="field_album">Album</label>
+                    <select class="form-control" id="field_album" name="album" formControlName="albumId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="albumsOption.id" *ngFor="let albumsOption of albums; trackBy: trackAlbumsById">{{albumsOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.listDetails" for="field_listDetails">List Details</label>
+                    <select class="form-control" id="field_listDetails" name="listDetails" formControlName="listDetailsId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="listDetailsOption.id" *ngFor="let listDetailsOption of listdetails; trackBy: trackListDetailsById">{{listDetailsOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

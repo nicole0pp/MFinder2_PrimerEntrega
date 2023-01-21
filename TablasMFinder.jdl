@@ -1,0 +1,42 @@
+
+entity Songs {
+	name String required,
+    picture Blob
+    duration Duration,
+    audio Blob,
+    artists String
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Albums{
+	name String required,
+    picture Blob,
+    publicationDate LocalDate,
+}
+entity ReproductionLists{
+	name String required,
+    picture Blob,
+}
+entity ListDetails{}
+
+
+entity MusicGenres{
+	name String required,
+    type String
+}
+
+relationship OneToMany{
+	 ListDetails{song} to Songs
+}
+relationship ManyToOne {
+    Songs{album} to Albums
+}
+relationship OneToOne {
+    Songs{musicGenre} to MusicGenres,
+    ListDetails{list} to ReproductionLists
+}
+
+dto * with mapstruct
+paginate all with pagination
+service all with serviceImpl
