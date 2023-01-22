@@ -4,18 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { IReproductionLists } from 'app/shared/model/reproduction-lists.model';
-import { ReproductionListsService } from './reproduction-lists.service';
+import { IFavoriteList } from 'app/shared/model/reproduction-lists.model';
+import { FavoriteListService } from './reproduction-lists.service';
 
 @Component({
   selector: 'jhi-reproduction-lists-delete-dialog',
   templateUrl: './reproduction-lists-delete-dialog.component.html'
 })
-export class ReproductionListsDeleteDialogComponent {
-  reproductionLists: IReproductionLists;
+export class FavoriteListDeleteDialogComponent {
+  FavoriteList: IFavoriteList;
 
   constructor(
-    protected reproductionListsService: ReproductionListsService,
+    protected FavoriteListService: FavoriteListService,
     public activeModal: NgbActiveModal,
     protected eventManager: JhiEventManager
   ) {}
@@ -25,10 +25,10 @@ export class ReproductionListsDeleteDialogComponent {
   }
 
   confirmDelete(id: number) {
-    this.reproductionListsService.delete(id).subscribe(response => {
+    this.FavoriteListService.delete(id).subscribe(response => {
       this.eventManager.broadcast({
-        name: 'reproductionListsListModification',
-        content: 'Deleted an reproductionLists'
+        name: 'FavoriteListListModification',
+        content: 'Deleted an FavoriteList'
       });
       this.activeModal.dismiss(true);
     });
@@ -39,16 +39,16 @@ export class ReproductionListsDeleteDialogComponent {
   selector: 'jhi-reproduction-lists-delete-popup',
   template: ''
 })
-export class ReproductionListsDeletePopupComponent implements OnInit, OnDestroy {
+export class FavoriteListDeletePopupComponent implements OnInit, OnDestroy {
   protected ngbModalRef: NgbModalRef;
 
   constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ reproductionLists }) => {
+    this.activatedRoute.data.subscribe(({ FavoriteList }) => {
       setTimeout(() => {
-        this.ngbModalRef = this.modalService.open(ReproductionListsDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static' });
-        this.ngbModalRef.componentInstance.reproductionLists = reproductionLists;
+        this.ngbModalRef = this.modalService.open(FavoriteListDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static' });
+        this.ngbModalRef.componentInstance.FavoriteList = FavoriteList;
         this.ngbModalRef.result.then(
           result => {
             this.router.navigate(['/reproduction-lists', { outlets: { popup: null } }]);

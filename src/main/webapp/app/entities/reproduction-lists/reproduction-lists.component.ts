@@ -5,19 +5,19 @@ import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
-import { IReproductionLists } from 'app/shared/model/reproduction-lists.model';
+import { IFavoriteList } from 'app/shared/model/reproduction-lists.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { ReproductionListsService } from './reproduction-lists.service';
+import { FavoriteListService } from './reproduction-lists.service';
 
 @Component({
   selector: 'jhi-reproduction-lists',
   templateUrl: './reproduction-lists.component.html'
 })
-export class ReproductionListsComponent implements OnInit, OnDestroy {
+export class FavoriteListComponent implements OnInit, OnDestroy {
   currentAccount: any;
-  reproductionLists: IReproductionLists[];
+  FavoriteList: IFavoriteList[];
   error: any;
   success: any;
   eventSubscriber: Subscription;
@@ -31,7 +31,7 @@ export class ReproductionListsComponent implements OnInit, OnDestroy {
   reverse: any;
 
   constructor(
-    protected reproductionListsService: ReproductionListsService,
+    protected FavoriteListService: FavoriteListService,
     protected parseLinks: JhiParseLinks,
     protected jhiAlertService: JhiAlertService,
     protected accountService: AccountService,
@@ -50,16 +50,14 @@ export class ReproductionListsComponent implements OnInit, OnDestroy {
   }
 
   loadAll() {
-    this.reproductionListsService
-      .query({
-        page: this.page - 1,
-        size: this.itemsPerPage,
-        sort: this.sort()
-      })
-      .subscribe(
-        (res: HttpResponse<IReproductionLists[]>) => this.paginateReproductionLists(res.body, res.headers),
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
+    this.FavoriteListService.query({
+      page: this.page - 1,
+      size: this.itemsPerPage,
+      sort: this.sort()
+    }).subscribe(
+      (res: HttpResponse<IFavoriteList[]>) => this.paginateFavoriteList(res.body, res.headers),
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   loadPage(page: number) {
@@ -97,14 +95,14 @@ export class ReproductionListsComponent implements OnInit, OnDestroy {
     this.accountService.identity().then(account => {
       this.currentAccount = account;
     });
-    this.registerChangeInReproductionLists();
+    this.registerChangeInFavoriteList();
   }
 
   ngOnDestroy() {
     this.eventManager.destroy(this.eventSubscriber);
   }
 
-  trackId(index: number, item: IReproductionLists) {
+  trackId(index: number, item: IFavoriteList) {
     return item.id;
   }
 
@@ -116,8 +114,8 @@ export class ReproductionListsComponent implements OnInit, OnDestroy {
     return this.dataUtils.openFile(contentType, field);
   }
 
-  registerChangeInReproductionLists() {
-    this.eventSubscriber = this.eventManager.subscribe('reproductionListsListModification', response => this.loadAll());
+  registerChangeInFavoriteList() {
+    this.eventSubscriber = this.eventManager.subscribe('FavoriteListListModification', response => this.loadAll());
   }
 
   sort() {
@@ -128,10 +126,10 @@ export class ReproductionListsComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  protected paginateReproductionLists(data: IReproductionLists[], headers: HttpHeaders) {
+  protected paginateFavoriteList(data: IFavoriteList[], headers: HttpHeaders) {
     this.links = this.parseLinks.parse(headers.get('link'));
     this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
-    this.reproductionLists = data;
+    this.FavoriteList = data;
   }
 
   protected onError(errorMessage: string) {

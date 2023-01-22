@@ -7,7 +7,7 @@
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230113162103_added_entity_Songs.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230113162104_added_entity_Albums.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230113162105_added_entity_ReproductionLists.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230113162105_added_entity_FavoriteList.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230113162106_added_entity_ListDetails.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230113162107_added_entity_MusicGenres.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230114160140_added_entity_Artist.xml" relativeToChangelogFile="false"/>

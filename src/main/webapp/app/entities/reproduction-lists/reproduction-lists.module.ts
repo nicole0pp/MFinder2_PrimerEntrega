@@ -5,36 +5,36 @@ import { JhiLanguageHelper } from 'app/core';
 
 import { MFinder2SharedModule } from 'app/shared';
 import {
-  ReproductionListsComponent,
-  ReproductionListsDetailComponent,
-  ReproductionListsUpdateComponent,
-  ReproductionListsDeletePopupComponent,
-  ReproductionListsDeleteDialogComponent,
-  reproductionListsRoute,
-  reproductionListsPopupRoute
+  FavoriteListComponent,
+  FavoriteListDetailComponent,
+  FavoriteListUpdateComponent,
+  FavoriteListDeletePopupComponent,
+  FavoriteListDeleteDialogComponent,
+  FavoriteListRoute,
+  FavoriteListPopupRoute
 } from './';
 
-const ENTITY_STATES = [...reproductionListsRoute, ...reproductionListsPopupRoute];
+const ENTITY_STATES = [...FavoriteListRoute, ...FavoriteListPopupRoute];
 
 @NgModule({
   imports: [MFinder2SharedModule, RouterModule.forChild(ENTITY_STATES)],
   declarations: [
-    ReproductionListsComponent,
-    ReproductionListsDetailComponent,
-    ReproductionListsUpdateComponent,
-    ReproductionListsDeleteDialogComponent,
-    ReproductionListsDeletePopupComponent
+    FavoriteListComponent,
+    FavoriteListDetailComponent,
+    FavoriteListUpdateComponent,
+    FavoriteListDeleteDialogComponent,
+    FavoriteListDeletePopupComponent
   ],
   entryComponents: [
-    ReproductionListsComponent,
-    ReproductionListsUpdateComponent,
-    ReproductionListsDeleteDialogComponent,
-    ReproductionListsDeletePopupComponent
+    FavoriteListComponent,
+    FavoriteListUpdateComponent,
+    FavoriteListDeleteDialogComponent,
+    FavoriteListDeletePopupComponent
   ],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MFinder2ReproductionListsModule {
+export class MFinder2FavoriteListModule {
   constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
     this.languageHelper.language.subscribe((languageKey: string) => {
       if (languageKey !== undefined) {

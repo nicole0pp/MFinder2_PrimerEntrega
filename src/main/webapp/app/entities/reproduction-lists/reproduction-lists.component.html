@@ -1,49 +1,49 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="mFinder2App.reproductionLists.home.title">Reproduction Lists</span>
+        <span jhiTranslate="mFinder2App.FavoriteList.home.title">Reproduction Lists</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-reproduction-lists" [routerLink]="['/reproduction-lists/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="mFinder2App.reproductionLists.home.createLabel">
+            <span  jhiTranslate="mFinder2App.FavoriteList.home.createLabel">
             Create new Reproduction Lists
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="reproductionLists">
+    <div class="table-responsive" *ngIf="FavoriteList">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="name"><span jhiTranslate="mFinder2App.reproductionLists.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="picture"><span jhiTranslate="mFinder2App.reproductionLists.picture">Picture</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="mFinder2App.FavoriteList.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="picture"><span jhiTranslate="mFinder2App.FavoriteList.picture">Picture</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let reproductionLists of reproductionLists ;trackBy: trackId">
-                <td><a [routerLink]="['/reproduction-lists', reproductionLists.id, 'view' ]">{{reproductionLists.id}}</a></td>
-                <td>{{reproductionLists.name}}</td>
+            <tr *ngFor="let FavoriteList of FavoriteList ;trackBy: trackId">
+                <td><a [routerLink]="['/reproduction-lists', FavoriteList.id, 'view' ]">{{FavoriteList.id}}</a></td>
+                <td>{{FavoriteList.name}}</td>
                 <td>
-                    <a *ngIf="reproductionLists.picture" (click)="openFile(reproductionLists.pictureContentType, reproductionLists.picture)" jhiTranslate="entity.action.open">open</a>
-                    <span *ngIf="reproductionLists.picture">{{reproductionLists.pictureContentType}}, {{byteSize(reproductionLists.picture)}}</span>
+                    <a *ngIf="FavoriteList.picture" (click)="openFile(FavoriteList.pictureContentType, FavoriteList.picture)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="FavoriteList.picture">{{FavoriteList.pictureContentType}}, {{byteSize(FavoriteList.picture)}}</span>
                 </td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/reproduction-lists', reproductionLists.id, 'view' ]"
+                                [routerLink]="['/reproduction-lists', FavoriteList.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/reproduction-lists', reproductionLists.id, 'edit']"
+                                [routerLink]="['/reproduction-lists', FavoriteList.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'reproduction-lists', { outlets: { popup: reproductionLists.id + '/delete'} }]"
+                                [routerLink]="['/', 'reproduction-lists', { outlets: { popup: FavoriteList.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
@@ -56,7 +56,7 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="reproductionLists && reproductionLists.length">
+    <div *ngIf="FavoriteList && FavoriteList.length">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

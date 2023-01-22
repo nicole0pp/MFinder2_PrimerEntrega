@@ -28,7 +28,7 @@ public class ListDetails implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    private ReproductionLists list;
+    private FavoriteList list;
 
     @OneToMany(mappedBy = "listDetails")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -43,17 +43,17 @@ public class ListDetails implements Serializable {
         this.id = id;
     }
 
-    public ReproductionLists getList() {
+    public FavoriteList getList() {
         return list;
     }
 
-    public ListDetails list(ReproductionLists reproductionLists) {
-        this.list = reproductionLists;
+    public ListDetails list(FavoriteList FavoriteList) {
+        this.list = FavoriteList;
         return this;
     }
 
-    public void setList(ReproductionLists reproductionLists) {
-        this.list = reproductionLists;
+    public void setList(FavoriteList FavoriteList) {
+        this.list = FavoriteList;
     }
 
     public Set<Songs> getSongs() {

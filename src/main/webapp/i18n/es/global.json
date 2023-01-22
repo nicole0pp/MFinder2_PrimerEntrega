@@ -9,7 +9,7 @@
         "main": "Entidades",
         "songs": "Songs",
         "albums": "Albums",
-        "reproductionLists": "Reproduction Lists",
+        "FavoriteList": "Reproduction Lists",
         "listDetails": "List Details",
         "musicGenres": "Music Genres",
         "artist": "Artist",

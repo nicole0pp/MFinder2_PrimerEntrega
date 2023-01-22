@@ -5,34 +5,34 @@ import { FormBuilder } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { ReproductionListsUpdateComponent } from 'app/entities/reproduction-lists/reproduction-lists-update.component';
-import { ReproductionListsService } from 'app/entities/reproduction-lists/reproduction-lists.service';
-import { ReproductionLists } from 'app/shared/model/reproduction-lists.model';
+import { FavoriteListUpdateComponent } from 'app/entities/reproduction-lists/reproduction-lists-update.component';
+import { FavoriteListService } from 'app/entities/reproduction-lists/reproduction-lists.service';
+import { FavoriteList } from 'app/shared/model/reproduction-lists.model';
 
 describe('Component Tests', () => {
-  describe('ReproductionLists Management Update Component', () => {
-    let comp: ReproductionListsUpdateComponent;
-    let fixture: ComponentFixture<ReproductionListsUpdateComponent>;
-    let service: ReproductionListsService;
+  describe('FavoriteList Management Update Component', () => {
+    let comp: FavoriteListUpdateComponent;
+    let fixture: ComponentFixture<FavoriteListUpdateComponent>;
+    let service: FavoriteListService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [ReproductionListsUpdateComponent],
+        declarations: [FavoriteListUpdateComponent],
         providers: [FormBuilder]
       })
-        .overrideTemplate(ReproductionListsUpdateComponent, '')
+        .overrideTemplate(FavoriteListUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(ReproductionListsUpdateComponent);
+      fixture = TestBed.createComponent(FavoriteListUpdateComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(ReproductionListsService);
+      service = fixture.debugElement.injector.get(FavoriteListService);
     });
 
     describe('save', () => {
       it('Should call update service on save for existing entity', fakeAsync(() => {
         // GIVEN
-        const entity = new ReproductionLists(123);
+        const entity = new FavoriteList(123);
         spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN
@@ -46,7 +46,7 @@ describe('Component Tests', () => {
 
       it('Should call create service on save for new entity', fakeAsync(() => {
         // GIVEN
-        const entity = new ReproductionLists();
+        const entity = new FavoriteList();
         spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN

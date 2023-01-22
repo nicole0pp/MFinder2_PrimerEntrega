@@ -14,7 +14,7 @@
                     <label class="form-control-label" jhiTranslate="mFinder2App.listDetails.list" for="field_list">List</label>
                     <select class="form-control" id="field_list" name="list" formControlName="listId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="reproductionListsOption.id" *ngFor="let reproductionListsOption of lists; trackBy: trackReproductionListsById">{{reproductionListsOption.id}}</option>
+                        <option [ngValue]="FavoriteListOption.id" *ngFor="let FavoriteListOption of lists; trackBy: trackFavoriteListById">{{FavoriteListOption.id}}</option>
                     </select>
                 </div>
             </div>

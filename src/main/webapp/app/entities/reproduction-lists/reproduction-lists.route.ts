@@ -5,92 +5,92 @@ import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { ReproductionLists } from 'app/shared/model/reproduction-lists.model';
-import { ReproductionListsService } from './reproduction-lists.service';
-import { ReproductionListsComponent } from './reproduction-lists.component';
-import { ReproductionListsDetailComponent } from './reproduction-lists-detail.component';
-import { ReproductionListsUpdateComponent } from './reproduction-lists-update.component';
-import { ReproductionListsDeletePopupComponent } from './reproduction-lists-delete-dialog.component';
-import { IReproductionLists } from 'app/shared/model/reproduction-lists.model';
+import { FavoriteList } from 'app/shared/model/reproduction-lists.model';
+import { FavoriteListService } from './reproduction-lists.service';
+import { FavoriteListComponent } from './reproduction-lists.component';
+import { FavoriteListDetailComponent } from './reproduction-lists-detail.component';
+import { FavoriteListUpdateComponent } from './reproduction-lists-update.component';
+import { FavoriteListDeletePopupComponent } from './reproduction-lists-delete-dialog.component';
+import { IFavoriteList } from 'app/shared/model/reproduction-lists.model';
 
 @Injectable({ providedIn: 'root' })
-export class ReproductionListsResolve implements Resolve<IReproductionLists> {
-  constructor(private service: ReproductionListsService) {}
+export class FavoriteListResolve implements Resolve<IFavoriteList> {
+  constructor(private service: FavoriteListService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IReproductionLists> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IFavoriteList> {
     const id = route.params['id'] ? route.params['id'] : null;
     if (id) {
       return this.service.find(id).pipe(
-        filter((response: HttpResponse<ReproductionLists>) => response.ok),
-        map((reproductionLists: HttpResponse<ReproductionLists>) => reproductionLists.body)
+        filter((response: HttpResponse<FavoriteList>) => response.ok),
+        map((FavoriteList: HttpResponse<FavoriteList>) => FavoriteList.body)
       );
     }
-    return of(new ReproductionLists());
+    return of(new FavoriteList());
   }
 }
 
-export const reproductionListsRoute: Routes = [
+export const FavoriteListRoute: Routes = [
   {
     path: '',
-    component: ReproductionListsComponent,
+    component: FavoriteListComponent,
     resolve: {
       pagingParams: JhiResolvePagingParams
     },
     data: {
       authorities: ['ROLE_USER', 'ROLE_USER_ARTIST'],
       defaultSort: 'id,asc',
-      pageTitle: 'mFinder2App.reproductionLists.home.title'
+      pageTitle: 'mFinder2App.FavoriteList.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/view',
-    component: ReproductionListsDetailComponent,
+    component: FavoriteListDetailComponent,
     resolve: {
-      reproductionLists: ReproductionListsResolve
+      FavoriteList: FavoriteListResolve
     },
     data: {
       authorities: ['ROLE_USER', 'ROLE_USER_ARTIST'],
-      pageTitle: 'mFinder2App.reproductionLists.home.title'
+      pageTitle: 'mFinder2App.FavoriteList.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: 'new',
-    component: ReproductionListsUpdateComponent,
+    component: FavoriteListUpdateComponent,
     resolve: {
-      reproductionLists: ReproductionListsResolve
+      FavoriteList: FavoriteListResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mFinder2App.reproductionLists.home.title'
+      pageTitle: 'mFinder2App.FavoriteList.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/edit',
-    component: ReproductionListsUpdateComponent,
+    component: FavoriteListUpdateComponent,
     resolve: {
-      reproductionLists: ReproductionListsResolve
+      FavoriteList: FavoriteListResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mFinder2App.reproductionLists.home.title'
+      pageTitle: 'mFinder2App.FavoriteList.home.title'
     },
     canActivate: [UserRouteAccessService]
   }
 ];
 
-export const reproductionListsPopupRoute: Routes = [
+export const FavoriteListPopupRoute: Routes = [
   {
     path: ':id/delete',
-    component: ReproductionListsDeletePopupComponent,
+    component: FavoriteListDeletePopupComponent,
     resolve: {
-      reproductionLists: ReproductionListsResolve
+      FavoriteList: FavoriteListResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mFinder2App.reproductionLists.home.title'
+      pageTitle: 'mFinder2App.FavoriteList.home.title'
     },
     canActivate: [UserRouteAccessService],
     outlet: 'popup'

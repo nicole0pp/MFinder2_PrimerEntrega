@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link ListDetails} and its DTO {@link ListDetailsDTO}.
  */
-@Mapper(componentModel = "spring", uses = {ReproductionListsMapper.class})
+@Mapper(componentModel = "spring", uses = {FavoriteListMapper.class})
 public interface ListDetailsMapper extends EntityMapper<ListDetailsDTO, ListDetails> {
 
     @Mapping(source = "list.id", target = "listId")

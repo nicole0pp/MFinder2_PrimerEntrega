@@ -4,15 +4,15 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
-import { ReproductionListsService } from 'app/entities/reproduction-lists/reproduction-lists.service';
-import { IReproductionLists, ReproductionLists } from 'app/shared/model/reproduction-lists.model';
+import { FavoriteListService } from 'app/entities/reproduction-lists/reproduction-lists.service';
+import { IFavoriteList, FavoriteList } from 'app/shared/model/reproduction-lists.model';
 
 describe('Service Tests', () => {
-  describe('ReproductionLists Service', () => {
+  describe('FavoriteList Service', () => {
     let injector: TestBed;
-    let service: ReproductionListsService;
+    let service: FavoriteListService;
     let httpMock: HttpTestingController;
-    let elemDefault: IReproductionLists;
+    let elemDefault: IFavoriteList;
     let expectedResult;
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -20,10 +20,10 @@ describe('Service Tests', () => {
       });
       expectedResult = {};
       injector = getTestBed();
-      service = injector.get(ReproductionListsService);
+      service = injector.get(FavoriteListService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new ReproductionLists(0, 'AAAAAAA', 'image/png', 'AAAAAAA');
+      elemDefault = new FavoriteList(0, 'AAAAAAA', 'image/png', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -39,7 +39,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: elemDefault });
       });
 
-      it('should create a ReproductionLists', async () => {
+      it('should create a FavoriteList', async () => {
         const returnedFromService = Object.assign(
           {
             id: 0
@@ -48,7 +48,7 @@ describe('Service Tests', () => {
         );
         const expected = Object.assign({}, returnedFromService);
         service
-          .create(new ReproductionLists(null))
+          .create(new FavoriteList(null))
           .pipe(take(1))
           .subscribe(resp => (expectedResult = resp));
         const req = httpMock.expectOne({ method: 'POST' });
@@ -56,7 +56,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: expected });
       });
 
-      it('should update a ReproductionLists', async () => {
+      it('should update a FavoriteList', async () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
@@ -75,7 +75,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: expected });
       });
 
-      it('should return a list of ReproductionLists', async () => {
+      it('should return a list of FavoriteList', async () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
@@ -97,7 +97,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a ReproductionLists', async () => {
+      it('should delete a FavoriteList', async () => {
         const rxPromise = service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });

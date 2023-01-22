@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
       },
       {
         path: 'reproduction-lists',
-        loadChildren: './reproduction-lists/reproduction-lists.module#MFinder2ReproductionListsModule'
+        loadChildren: './reproduction-lists/reproduction-lists.module#MFinder2FavoriteListModule'
       },
       {
         path: 'list-details',

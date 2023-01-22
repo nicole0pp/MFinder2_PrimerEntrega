@@ -24,8 +24,8 @@ public class ListDetailsDTO implements Serializable {
         return listId;
     }
 
-    public void setListId(Long reproductionListsId) {
-        this.listId = reproductionListsId;
+    public void setListId(Long FavoriteListId) {
+        this.listId = FavoriteListId;
     }
 
     @Override

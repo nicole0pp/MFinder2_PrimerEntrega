@@ -4,24 +4,24 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { ReproductionListsDetailComponent } from 'app/entities/reproduction-lists/reproduction-lists-detail.component';
-import { ReproductionLists } from 'app/shared/model/reproduction-lists.model';
+import { FavoriteListDetailComponent } from 'app/entities/reproduction-lists/reproduction-lists-detail.component';
+import { FavoriteList } from 'app/shared/model/reproduction-lists.model';
 
 describe('Component Tests', () => {
-  describe('ReproductionLists Management Detail Component', () => {
-    let comp: ReproductionListsDetailComponent;
-    let fixture: ComponentFixture<ReproductionListsDetailComponent>;
-    const route = ({ data: of({ reproductionLists: new ReproductionLists(123) }) } as any) as ActivatedRoute;
+  describe('FavoriteList Management Detail Component', () => {
+    let comp: FavoriteListDetailComponent;
+    let fixture: ComponentFixture<FavoriteListDetailComponent>;
+    const route = ({ data: of({ FavoriteList: new FavoriteList(123) }) } as any) as ActivatedRoute;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [ReproductionListsDetailComponent],
+        declarations: [FavoriteListDetailComponent],
         providers: [{ provide: ActivatedRoute, useValue: route }]
       })
-        .overrideTemplate(ReproductionListsDetailComponent, '')
+        .overrideTemplate(FavoriteListDetailComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(ReproductionListsDetailComponent);
+      fixture = TestBed.createComponent(FavoriteListDetailComponent);
       comp = fixture.componentInstance;
     });
 
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         // THEN
-        expect(comp.reproductionLists).toEqual(jasmine.objectContaining({ id: 123 }));
+        expect(comp.FavoriteList).toEqual(jasmine.objectContaining({ id: 123 }));
       });
     });
   });

@@ -4,7 +4,7 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "otherEntityName": "reproductionLists",
+            "otherEntityName": "FavoriteList",
             "otherEntityRelationshipName": "listDetails",
             "relationshipName": "list",
             "otherEntityField": "id",

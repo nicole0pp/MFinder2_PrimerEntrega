@@ -7,8 +7,8 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IListDetails, ListDetails } from 'app/shared/model/list-details.model';
 import { ListDetailsService } from './list-details.service';
-import { IReproductionLists } from 'app/shared/model/reproduction-lists.model';
-import { ReproductionListsService } from 'app/entities/reproduction-lists';
+import { IFavoriteList } from 'app/shared/model/reproduction-lists.model';
+import { FavoriteListService } from 'app/entities/reproduction-lists';
 
 @Component({
   selector: 'jhi-list-details-update',
@@ -18,7 +18,7 @@ export class ListDetailsUpdateComponent implements OnInit {
   listDetails: IListDetails;
   isSaving: boolean;
 
-  lists: IReproductionLists[];
+  lists: IFavoriteList[];
 
   editForm = this.fb.group({
     id: [],
@@ -28,7 +28,7 @@ export class ListDetailsUpdateComponent implements OnInit {
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected listDetailsService: ListDetailsService,
-    protected reproductionListsService: ReproductionListsService,
+    protected FavoriteListService: FavoriteListService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -39,25 +39,23 @@ export class ListDetailsUpdateComponent implements OnInit {
       this.updateForm(listDetails);
       this.listDetails = listDetails;
     });
-    this.reproductionListsService
-      .query({ filter: 'listdetails-is-null' })
+    this.FavoriteListService.query({ filter: 'listdetails-is-null' })
       .pipe(
-        filter((mayBeOk: HttpResponse<IReproductionLists[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IReproductionLists[]>) => response.body)
+        filter((mayBeOk: HttpResponse<IFavoriteList[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IFavoriteList[]>) => response.body)
       )
       .subscribe(
-        (res: IReproductionLists[]) => {
+        (res: IFavoriteList[]) => {
           if (!this.listDetails.listId) {
             this.lists = res;
           } else {
-            this.reproductionListsService
-              .find(this.listDetails.listId)
+            this.FavoriteListService.find(this.listDetails.listId)
               .pipe(
-                filter((subResMayBeOk: HttpResponse<IReproductionLists>) => subResMayBeOk.ok),
-                map((subResponse: HttpResponse<IReproductionLists>) => subResponse.body)
+                filter((subResMayBeOk: HttpResponse<IFavoriteList>) => subResMayBeOk.ok),
+                map((subResponse: HttpResponse<IFavoriteList>) => subResponse.body)
               )
               .subscribe(
-                (subRes: IReproductionLists) => (this.lists = [subRes].concat(res)),
+                (subRes: IFavoriteList) => (this.lists = [subRes].concat(res)),
                 (subRes: HttpErrorResponse) => this.onError(subRes.message)
               );
           }
@@ -112,7 +110,7 @@ export class ListDetailsUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackReproductionListsById(index: number, item: IReproductionLists) {
+  trackFavoriteListById(index: number, item: IFavoriteList) {
     return item.id;
   }
 }

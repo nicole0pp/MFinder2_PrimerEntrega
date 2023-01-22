@@ -14,7 +14,7 @@ entity Albums{
     picture Blob,
     publicationDate LocalDate,
 }
-entity ReproductionLists{
+entity FavoriteList{
 	name String required,
     picture Blob,
 }
@@ -34,7 +34,7 @@ relationship ManyToOne {
 }
 relationship OneToOne {
     Songs{musicGenre} to MusicGenres,
-    ListDetails{list} to ReproductionLists
+    ListDetails{list} to FavoriteList
 }
 
 dto * with mapstruct

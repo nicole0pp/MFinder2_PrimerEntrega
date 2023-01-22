@@ -5,27 +5,27 @@ import { Observable, of } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { ReproductionListsDeleteDialogComponent } from 'app/entities/reproduction-lists/reproduction-lists-delete-dialog.component';
-import { ReproductionListsService } from 'app/entities/reproduction-lists/reproduction-lists.service';
+import { FavoriteListDeleteDialogComponent } from 'app/entities/reproduction-lists/reproduction-lists-delete-dialog.component';
+import { FavoriteListService } from 'app/entities/reproduction-lists/reproduction-lists.service';
 
 describe('Component Tests', () => {
-  describe('ReproductionLists Management Delete Component', () => {
-    let comp: ReproductionListsDeleteDialogComponent;
-    let fixture: ComponentFixture<ReproductionListsDeleteDialogComponent>;
-    let service: ReproductionListsService;
+  describe('FavoriteList Management Delete Component', () => {
+    let comp: FavoriteListDeleteDialogComponent;
+    let fixture: ComponentFixture<FavoriteListDeleteDialogComponent>;
+    let service: FavoriteListService;
     let mockEventManager: any;
     let mockActiveModal: any;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [ReproductionListsDeleteDialogComponent]
+        declarations: [FavoriteListDeleteDialogComponent]
       })
-        .overrideTemplate(ReproductionListsDeleteDialogComponent, '')
+        .overrideTemplate(FavoriteListDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(ReproductionListsDeleteDialogComponent);
+      fixture = TestBed.createComponent(FavoriteListDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(ReproductionListsService);
+      service = fixture.debugElement.injector.get(FavoriteListService);
       mockEventManager = fixture.debugElement.injector.get(JhiEventManager);
       mockActiveModal = fixture.debugElement.injector.get(NgbActiveModal);
     });

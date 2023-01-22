@@ -5,20 +5,20 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data } from '@angular/router';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { ReproductionListsComponent } from 'app/entities/reproduction-lists/reproduction-lists.component';
-import { ReproductionListsService } from 'app/entities/reproduction-lists/reproduction-lists.service';
-import { ReproductionLists } from 'app/shared/model/reproduction-lists.model';
+import { FavoriteListComponent } from 'app/entities/reproduction-lists/reproduction-lists.component';
+import { FavoriteListService } from 'app/entities/reproduction-lists/reproduction-lists.service';
+import { FavoriteList } from 'app/shared/model/reproduction-lists.model';
 
 describe('Component Tests', () => {
-  describe('ReproductionLists Management Component', () => {
-    let comp: ReproductionListsComponent;
-    let fixture: ComponentFixture<ReproductionListsComponent>;
-    let service: ReproductionListsService;
+  describe('FavoriteList Management Component', () => {
+    let comp: FavoriteListComponent;
+    let fixture: ComponentFixture<FavoriteListComponent>;
+    let service: FavoriteListService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [ReproductionListsComponent],
+        declarations: [FavoriteListComponent],
         providers: [
           {
             provide: ActivatedRoute,
@@ -37,12 +37,12 @@ describe('Component Tests', () => {
           }
         ]
       })
-        .overrideTemplate(ReproductionListsComponent, '')
+        .overrideTemplate(FavoriteListComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(ReproductionListsComponent);
+      fixture = TestBed.createComponent(FavoriteListComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(ReproductionListsService);
+      service = fixture.debugElement.injector.get(FavoriteListService);
     });
 
     it('Should call load all on init', () => {
@@ -51,7 +51,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new ReproductionLists(123)],
+            body: [new FavoriteList(123)],
             headers
           })
         )
@@ -62,7 +62,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.reproductionLists[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.FavoriteList[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should load a page', () => {
@@ -71,7 +71,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new ReproductionLists(123)],
+            body: [new FavoriteList(123)],
             headers
           })
         )
@@ -82,7 +82,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.reproductionLists[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.FavoriteList[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should not load a page is the page is the same as the previous page', () => {
@@ -101,7 +101,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new ReproductionLists(123)],
+            body: [new FavoriteList(123)],
             headers
           })
         )
@@ -114,7 +114,7 @@ describe('Component Tests', () => {
       // THEN
       expect(comp.page).toEqual(0);
       expect(service.query).toHaveBeenCalledTimes(2);
-      expect(comp.reproductionLists[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.FavoriteList[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
     it('should calculate the sort attribute for an id', () => {
       // WHEN

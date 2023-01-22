@@ -5,9 +5,9 @@ import java.util.Objects;
 import javax.persistence.Lob;
 
 /**
- * A DTO for the {@link com.mycompany.myapp.domain.ReproductionLists} entity.
+ * A DTO for the {@link com.mycompany.myapp.domain.FavoriteList} entity.
  */
-public class ReproductionListsDTO implements Serializable {
+public class FavoriteListDTO implements Serializable {
 
     private Long id;
 
@@ -60,11 +60,11 @@ public class ReproductionListsDTO implements Serializable {
             return false;
         }
 
-        ReproductionListsDTO reproductionListsDTO = (ReproductionListsDTO) o;
-        if (reproductionListsDTO.getId() == null || getId() == null) {
+        FavoriteListDTO FavoriteListDTO = (FavoriteListDTO) o;
+        if (FavoriteListDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), reproductionListsDTO.getId());
+        return Objects.equals(getId(), FavoriteListDTO.getId());
     }
 
     @Override
@@ -74,7 +74,7 @@ public class ReproductionListsDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "ReproductionListsDTO{" +
+        return "FavoriteListDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", picture='" + getPicture() + "'" +

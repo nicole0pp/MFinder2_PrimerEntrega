@@ -1,6 +1,6 @@
 {
   "mFinder2App": {
-    "reproductionLists": {
+    "FavoriteList": {
       "home": {
         "title": "Reproduction Lists",
         "createLabel": "Crear nuevo Reproduction Lists",

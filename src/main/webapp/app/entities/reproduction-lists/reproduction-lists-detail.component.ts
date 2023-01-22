@@ -2,20 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
-import { IReproductionLists } from 'app/shared/model/reproduction-lists.model';
+import { IFavoriteList } from 'app/shared/model/reproduction-lists.model';
 
 @Component({
   selector: 'jhi-reproduction-lists-detail',
   templateUrl: './reproduction-lists-detail.component.html'
 })
-export class ReproductionListsDetailComponent implements OnInit {
-  reproductionLists: IReproductionLists;
+export class FavoriteListDetailComponent implements OnInit {
+  FavoriteList: IFavoriteList;
 
   constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ reproductionLists }) => {
-      this.reproductionLists = reproductionLists;
+    this.activatedRoute.data.subscribe(({ FavoriteList }) => {
+      this.FavoriteList = FavoriteList;
     });
   }
 

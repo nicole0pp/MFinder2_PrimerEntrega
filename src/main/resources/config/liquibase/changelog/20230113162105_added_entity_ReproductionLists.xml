@@ -15,7 +15,7 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql, mariadb"/>
 
     <!--
-        Added the entity ReproductionLists.
+        Added the entity FavoriteList.
     -->
     <changeSet id="20230113162105-1" author="jhipster">
         <createTable tableName="reproduction_lists">

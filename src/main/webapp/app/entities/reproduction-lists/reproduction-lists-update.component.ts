@@ -4,15 +4,15 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
-import { IReproductionLists, ReproductionLists } from 'app/shared/model/reproduction-lists.model';
-import { ReproductionListsService } from './reproduction-lists.service';
+import { IFavoriteList, FavoriteList } from 'app/shared/model/reproduction-lists.model';
+import { FavoriteListService } from './reproduction-lists.service';
 
 @Component({
   selector: 'jhi-reproduction-lists-update',
   templateUrl: './reproduction-lists-update.component.html'
 })
-export class ReproductionListsUpdateComponent implements OnInit {
-  reproductionLists: IReproductionLists;
+export class FavoriteListUpdateComponent implements OnInit {
+  FavoriteList: IFavoriteList;
   isSaving: boolean;
 
   editForm = this.fb.group({
@@ -25,25 +25,25 @@ export class ReproductionListsUpdateComponent implements OnInit {
   constructor(
     protected dataUtils: JhiDataUtils,
     protected jhiAlertService: JhiAlertService,
-    protected reproductionListsService: ReproductionListsService,
+    protected FavoriteListService: FavoriteListService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
     this.isSaving = false;
-    this.activatedRoute.data.subscribe(({ reproductionLists }) => {
-      this.updateForm(reproductionLists);
-      this.reproductionLists = reproductionLists;
+    this.activatedRoute.data.subscribe(({ FavoriteList }) => {
+      this.updateForm(FavoriteList);
+      this.FavoriteList = FavoriteList;
     });
   }
 
-  updateForm(reproductionLists: IReproductionLists) {
+  updateForm(FavoriteList: IFavoriteList) {
     this.editForm.patchValue({
-      id: reproductionLists.id,
-      name: reproductionLists.name,
-      picture: reproductionLists.picture,
-      pictureContentType: reproductionLists.pictureContentType
+      id: FavoriteList.id,
+      name: FavoriteList.name,
+      picture: FavoriteList.picture,
+      pictureContentType: FavoriteList.pictureContentType
     });
   }
 
@@ -85,17 +85,17 @@ export class ReproductionListsUpdateComponent implements OnInit {
 
   save() {
     this.isSaving = true;
-    const reproductionLists = this.createFromForm();
-    if (reproductionLists.id !== undefined) {
-      this.subscribeToSaveResponse(this.reproductionListsService.update(reproductionLists));
+    const FavoriteList = this.createFromForm();
+    if (FavoriteList.id !== undefined) {
+      this.subscribeToSaveResponse(this.FavoriteListService.update(FavoriteList));
     } else {
-      this.subscribeToSaveResponse(this.reproductionListsService.create(reproductionLists));
+      this.subscribeToSaveResponse(this.FavoriteListService.create(FavoriteList));
     }
   }
 
-  private createFromForm(): IReproductionLists {
+  private createFromForm(): IFavoriteList {
     const entity = {
-      ...new ReproductionLists(),
+      ...new FavoriteList(),
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
       pictureContentType: this.editForm.get(['pictureContentType']).value,
@@ -104,8 +104,8 @@ export class ReproductionListsUpdateComponent implements OnInit {
     return entity;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IReproductionLists>>) {
-    result.subscribe((res: HttpResponse<IReproductionLists>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IFavoriteList>>) {
+    result.subscribe((res: HttpResponse<IFavoriteList>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
   }
 
   protected onSaveSuccess() {
