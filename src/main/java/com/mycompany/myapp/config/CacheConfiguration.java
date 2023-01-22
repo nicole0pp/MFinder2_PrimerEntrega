@@ -43,11 +43,11 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.User.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Authority.class.getName());
             createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities");
-            createCache(cm, com.mycompany.myapp.domain.Songs.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Song.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Album.class.getName());
             createCache(cm, com.mycompany.myapp.domain.FavoriteList.class.getName());
             createCache(cm, com.mycompany.myapp.domain.ListDetails.class.getName());
-            createCache(cm, com.mycompany.myapp.domain.ListDetails.class.getName() + ".songs");
+            createCache(cm, com.mycompany.myapp.domain.ListDetails.class.getName() + ".Song");
             createCache(cm, com.mycompany.myapp.domain.MusicGenre.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Artist.class.getName());
             // jhipster-needle-ehcache-add-entry

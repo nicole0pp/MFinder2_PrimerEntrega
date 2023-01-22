@@ -15,7 +15,7 @@ public interface ListDetailsMapper extends EntityMapper<ListDetailsDTO, ListDeta
     ListDetailsDTO toDto(ListDetails listDetails);
 
     @Mapping(source = "listId", target = "list")
-    @Mapping(target = "songs", ignore = true)
+    @Mapping(target = "Song", ignore = true)
     ListDetails toEntity(ListDetailsDTO listDetailsDTO);
 
     default ListDetails fromId(Long id) {

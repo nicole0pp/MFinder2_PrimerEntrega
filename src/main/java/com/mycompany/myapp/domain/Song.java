@@ -13,12 +13,12 @@ import java.time.Duration;
 import java.util.Objects;
 
 /**
- * A Songs.
+ * A Song.
  */
 @Entity
-@Table(name = "songs")
+@Table(name = "Song")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Songs implements Serializable {
+public class Song implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -55,11 +55,11 @@ public class Songs implements Serializable {
     private MusicGenre musicGenre;
 
     @ManyToOne
-    @JsonIgnoreProperties("songs")
+    @JsonIgnoreProperties("Song")
     private Album Album;
 
     @ManyToOne
-    @JsonIgnoreProperties("songs")
+    @JsonIgnoreProperties("Song")
     private ListDetails listDetails;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -75,7 +75,7 @@ public class Songs implements Serializable {
         return name;
     }
 
-    public Songs name(String name) {
+    public Song name(String name) {
         this.name = name;
         return this;
     }
@@ -88,7 +88,7 @@ public class Songs implements Serializable {
         return picture;
     }
 
-    public Songs picture(byte[] picture) {
+    public Song picture(byte[] picture) {
         this.picture = picture;
         return this;
     }
@@ -101,7 +101,7 @@ public class Songs implements Serializable {
         return pictureContentType;
     }
 
-    public Songs pictureContentType(String pictureContentType) {
+    public Song pictureContentType(String pictureContentType) {
         this.pictureContentType = pictureContentType;
         return this;
     }
@@ -114,7 +114,7 @@ public class Songs implements Serializable {
         return duration;
     }
 
-    public Songs duration(Duration duration) {
+    public Song duration(Duration duration) {
         this.duration = duration;
         return this;
     }
@@ -127,7 +127,7 @@ public class Songs implements Serializable {
         return audio;
     }
 
-    public Songs audio(byte[] audio) {
+    public Song audio(byte[] audio) {
         this.audio = audio;
         return this;
     }
@@ -140,7 +140,7 @@ public class Songs implements Serializable {
         return audioContentType;
     }
 
-    public Songs audioContentType(String audioContentType) {
+    public Song audioContentType(String audioContentType) {
         this.audioContentType = audioContentType;
         return this;
     }
@@ -153,7 +153,7 @@ public class Songs implements Serializable {
         return artists;
     }
 
-    public Songs artists(String artists) {
+    public Song artists(String artists) {
         this.artists = artists;
         return this;
     }
@@ -166,7 +166,7 @@ public class Songs implements Serializable {
         return musicGenre;
     }
 
-    public Songs musicGenre(MusicGenre MusicGenre) {
+    public Song musicGenre(MusicGenre MusicGenre) {
         this.musicGenre = MusicGenre;
         return this;
     }
@@ -179,7 +179,7 @@ public class Songs implements Serializable {
         return Album;
     }
 
-    public Songs Album(Album Album) {
+    public Song Album(Album Album) {
         this.Album = Album;
         return this;
     }
@@ -192,7 +192,7 @@ public class Songs implements Serializable {
         return listDetails;
     }
 
-    public Songs listDetails(ListDetails listDetails) {
+    public Song listDetails(ListDetails listDetails) {
         this.listDetails = listDetails;
         return this;
     }
@@ -207,10 +207,10 @@ public class Songs implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Songs)) {
+        if (!(o instanceof Song)) {
             return false;
         }
-        return id != null && id.equals(((Songs) o).id);
+        return id != null && id.equals(((Song) o).id);
     }
 
     @Override
@@ -220,7 +220,7 @@ public class Songs implements Serializable {
 
     @Override
     public String toString() {
-        return "Songs{" +
+        return "Song{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", picture='" + getPicture() + "'" +

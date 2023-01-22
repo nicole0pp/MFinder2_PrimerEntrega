@@ -1,5 +1,5 @@
 {
-    "name": "Songs",
+    "name": "Song",
     "fields": [
         {
             "fieldName": "name",
@@ -31,7 +31,7 @@
         {
             "relationshipType": "one-to-one",
             "otherEntityName": "MusicGenre",
-            "otherEntityRelationshipName": "songs",
+            "otherEntityRelationshipName": "Song",
             "relationshipName": "musicGenre",
             "otherEntityField": "id",
             "ownerSide": true
@@ -39,7 +39,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "Album",
-            "otherEntityRelationshipName": "songs",
+            "otherEntityRelationshipName": "Song",
             "relationshipName": "Album",
             "otherEntityField": "id"
         },
@@ -51,7 +51,7 @@
         }
     ],
     "changelogDate": "20230113162103",
-    "entityTableName": "songs",
+    "entityTableName": "Song",
     "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",

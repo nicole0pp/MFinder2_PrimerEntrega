@@ -1,52 +1,52 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <div *ngIf="songs">
-            <h2><span jhiTranslate="mFinder2App.songs.detail.title">Songs</span> {{songs.id}}</h2>
+        <div *ngIf="Song">
+            <h2><span jhiTranslate="mFinder2App.Song.detail.title">Song</span> {{Song.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="mFinder2App.songs.name">Name</span></dt>
+                <dt><span jhiTranslate="mFinder2App.Song.name">Name</span></dt>
                 <dd>
-                    <span>{{songs.name}}</span>
+                    <span>{{Song.name}}</span>
                 </dd>
-                <dt><span jhiTranslate="mFinder2App.songs.picture">Picture</span></dt>
+                <dt><span jhiTranslate="mFinder2App.Song.picture">Picture</span></dt>
                 <dd>
-                    <div *ngIf="songs.picture">
-                        <a (click)="openFile(songs.pictureContentType, songs.picture)" jhiTranslate="entity.action.open">open</a>
-                        {{songs.pictureContentType}}, {{byteSize(songs.picture)}}
+                    <div *ngIf="Song.picture">
+                        <a (click)="openFile(Song.pictureContentType, Song.picture)" jhiTranslate="entity.action.open">open</a>
+                        {{Song.pictureContentType}}, {{byteSize(Song.picture)}}
                     </div>
                 </dd>
-                <dt><span jhiTranslate="mFinder2App.songs.duration">Duration</span></dt>
+                <dt><span jhiTranslate="mFinder2App.Song.duration">Duration</span></dt>
                 <dd>
-                    <span>{{songs.duration}}</span>
+                    <span>{{Song.duration}}</span>
                 </dd>
-                <dt><span jhiTranslate="mFinder2App.songs.audio">Audio</span></dt>
+                <dt><span jhiTranslate="mFinder2App.Song.audio">Audio</span></dt>
                 <dd>
-                    <div *ngIf="songs.audio">
-                        <a (click)="openFile(songs.audioContentType, songs.audio)" jhiTranslate="entity.action.open">open</a>
-                        {{songs.audioContentType}}, {{byteSize(songs.audio)}}
+                    <div *ngIf="Song.audio">
+                        <a (click)="openFile(Song.audioContentType, Song.audio)" jhiTranslate="entity.action.open">open</a>
+                        {{Song.audioContentType}}, {{byteSize(Song.audio)}}
                     </div>
                 </dd>
-                <dt><span jhiTranslate="mFinder2App.songs.artists">Artists</span></dt>
+                <dt><span jhiTranslate="mFinder2App.Song.artists">Artists</span></dt>
                 <dd>
-                    <span>{{songs.artists}}</span>
+                    <span>{{Song.artists}}</span>
                 </dd>
-                <dt><span jhiTranslate="mFinder2App.songs.musicGenre">Music Genre</span></dt>
+                <dt><span jhiTranslate="mFinder2App.Song.musicGenre">Music Genre</span></dt>
                 <dd>
-                    <div *ngIf="songs.musicGenreId">
-                        <a [routerLink]="['/music-genres', songs.musicGenreId, 'view']">{{songs.musicGenreId}}</a>
+                    <div *ngIf="Song.musicGenreId">
+                        <a [routerLink]="['/music-genres', Song.musicGenreId, 'view']">{{Song.musicGenreId}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="mFinder2App.songs.Album">Album</span></dt>
+                <dt><span jhiTranslate="mFinder2App.Song.Album">Album</span></dt>
                 <dd>
-                    <div *ngIf="songs.AlbumId">
-                        <a [routerLink]="['/Album', songs.AlbumId, 'view']">{{songs.AlbumId}}</a>
+                    <div *ngIf="Song.AlbumId">
+                        <a [routerLink]="['/Album', Song.AlbumId, 'view']">{{Song.AlbumId}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="mFinder2App.songs.listDetails">List Details</span></dt>
+                <dt><span jhiTranslate="mFinder2App.Song.listDetails">List Details</span></dt>
                 <dd>
-                    <div *ngIf="songs.listDetailsId">
-                        <a [routerLink]="['/list-details', songs.listDetailsId, 'view']">{{songs.listDetailsId}}</a>
+                    <div *ngIf="Song.listDetailsId">
+                        <a [routerLink]="['/list-details', Song.listDetailsId, 'view']">{{Song.listDetailsId}}</a>
                     </div>
                 </dd>
             </dl>
@@ -58,7 +58,7 @@
             </button>
 
             <button type="button"
-                    [routerLink]="['/songs', songs.id, 'edit']"
+                    [routerLink]="['/Song', Song.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>

@@ -1,16 +1,16 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-songs-heading" jhiTranslate="mFinder2App.songs.home.createOrEditLabel">Create or edit a Songs</h2>
+            <h2 id="jhi-Song-heading" jhiTranslate="mFinder2App.Song.home.createOrEditLabel">Create or edit a Song</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!songs.id">
+                <div class="form-group" [hidden]="!Song.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.name" for="field_name">Name</label>
+                    <label class="form-control-label" jhiTranslate="mFinder2App.Song.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
                     <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.picture" for="field_picture">Picture</label>
+                    <label class="form-control-label" jhiTranslate="mFinder2App.Song.picture" for="field_picture">Picture</label>
                     <div>
                         <div *ngIf="editForm.get('picture').value" class="form-text text-danger clearfix">
                             <a class="pull-left" (click)="openFile(editForm.get('pictureContentType').value, editForm.get('picture').value)" jhiTranslate="entity.action.open">open</a><br>
@@ -39,12 +39,12 @@
                            formControlName="pictureContentType" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.duration" for="field_duration">Duration</label>
+                    <label class="form-control-label" jhiTranslate="mFinder2App.Song.duration" for="field_duration">Duration</label>
                     <input type="number" class="form-control" name="duration" id="field_duration"
                            formControlName="duration"/>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.audio" for="field_audio">Audio</label>
+                    <label class="form-control-label" jhiTranslate="mFinder2App.Song.audio" for="field_audio">Audio</label>
                     <div>
                         <div *ngIf="editForm.get('audio').value" class="form-text text-danger clearfix">
                             <a class="pull-left" (click)="openFile(editForm.get('audioContentType').value, editForm.get('audio').value)" jhiTranslate="entity.action.open">open</a><br>
@@ -62,27 +62,27 @@
                            formControlName="audioContentType" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.artists" for="field_artists">Artists</label>
+                    <label class="form-control-label" jhiTranslate="mFinder2App.Song.artists" for="field_artists">Artists</label>
                     <input type="text" class="form-control" name="artists" id="field_artists"
                            formControlName="artists"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.musicGenre" for="field_musicGenre">Music Genre</label>
+                    <label class="form-control-label" jhiTranslate="mFinder2App.Song.musicGenre" for="field_musicGenre">Music Genre</label>
                     <select class="form-control" id="field_musicGenre" name="musicGenre" formControlName="musicGenreId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="MusicGenreOption.id" *ngFor="let MusicGenreOption of MusicGenre; trackBy: trackMusicGenreById">{{MusicGenreOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.Album" for="field_Album">Album</label>
+                    <label class="form-control-label" jhiTranslate="mFinder2App.Song.Album" for="field_Album">Album</label>
                     <select class="form-control" id="field_Album" name="Album" formControlName="AlbumId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="AlbumOption.id" *ngFor="let AlbumOption of Album; trackBy: trackAlbumById">{{AlbumOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.listDetails" for="field_listDetails">List Details</label>
+                    <label class="form-control-label" jhiTranslate="mFinder2App.Song.listDetails" for="field_listDetails">List Details</label>
                     <select class="form-control" id="field_listDetails" name="listDetails" formControlName="listDetailsId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="listDetailsOption.id" *ngFor="let listDetailsOption of listdetails; trackBy: trackListDetailsById">{{listDetailsOption.id}}</option>

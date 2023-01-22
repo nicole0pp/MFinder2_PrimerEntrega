@@ -4,24 +4,24 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { SongsDetailComponent } from 'app/entities/songs/songs-detail.component';
-import { Songs } from 'app/shared/model/songs.model';
+import { SongDetailComponent } from 'app/entities/Song/Song-detail.component';
+import { Song } from 'app/shared/model/Song.model';
 
 describe('Component Tests', () => {
-  describe('Songs Management Detail Component', () => {
-    let comp: SongsDetailComponent;
-    let fixture: ComponentFixture<SongsDetailComponent>;
-    const route = ({ data: of({ songs: new Songs(123) }) } as any) as ActivatedRoute;
+  describe('Song Management Detail Component', () => {
+    let comp: SongDetailComponent;
+    let fixture: ComponentFixture<SongDetailComponent>;
+    const route = ({ data: of({ Song: new Song(123) }) } as any) as ActivatedRoute;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [SongsDetailComponent],
+        declarations: [SongDetailComponent],
         providers: [{ provide: ActivatedRoute, useValue: route }]
       })
-        .overrideTemplate(SongsDetailComponent, '')
+        .overrideTemplate(SongDetailComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(SongsDetailComponent);
+      fixture = TestBed.createComponent(SongDetailComponent);
       comp = fixture.componentInstance;
     });
 
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         // THEN
-        expect(comp.songs).toEqual(jasmine.objectContaining({ id: 123 }));
+        expect(comp.Song).toEqual(jasmine.objectContaining({ id: 123 }));
       });
     });
   });

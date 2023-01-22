@@ -6,9 +6,9 @@ import java.util.Objects;
 import javax.persistence.Lob;
 
 /**
- * A DTO for the {@link com.mycompany.myapp.domain.Songs} entity.
+ * A DTO for the {@link com.mycompany.myapp.domain.Song} entity.
  */
-public class SongsDTO implements Serializable {
+public class SongDTO implements Serializable {
 
     private Long id;
 
@@ -131,11 +131,11 @@ public class SongsDTO implements Serializable {
             return false;
         }
 
-        SongsDTO songsDTO = (SongsDTO) o;
-        if (songsDTO.getId() == null || getId() == null) {
+        SongDTO SongDTO = (SongDTO) o;
+        if (SongDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), songsDTO.getId());
+        return Objects.equals(getId(), SongDTO.getId());
     }
 
     @Override
@@ -145,7 +145,7 @@ public class SongsDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "SongsDTO{" +
+        return "SongDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", picture='" + getPicture() + "'" +

@@ -4,27 +4,27 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { ISongs } from 'app/shared/model/songs.model';
-import { SongsService } from './songs.service';
+import { ISong } from 'app/shared/model/Song.model';
+import { SongService } from './Song.service';
 
 @Component({
-  selector: 'jhi-songs-delete-dialog',
-  templateUrl: './songs-delete-dialog.component.html'
+  selector: 'jhi-Song-delete-dialog',
+  templateUrl: './Song-delete-dialog.component.html'
 })
-export class SongsDeleteDialogComponent {
-  songs: ISongs;
+export class SongDeleteDialogComponent {
+  Song: ISong;
 
-  constructor(protected songsService: SongsService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
+  constructor(protected SongService: SongService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
   clear() {
     this.activeModal.dismiss('cancel');
   }
 
   confirmDelete(id: number) {
-    this.songsService.delete(id).subscribe(response => {
+    this.SongService.delete(id).subscribe(response => {
       this.eventManager.broadcast({
-        name: 'songsListModification',
-        content: 'Deleted an songs'
+        name: 'SongListModification',
+        content: 'Deleted an Song'
       });
       this.activeModal.dismiss(true);
     });
@@ -32,26 +32,26 @@ export class SongsDeleteDialogComponent {
 }
 
 @Component({
-  selector: 'jhi-songs-delete-popup',
+  selector: 'jhi-Song-delete-popup',
   template: ''
 })
-export class SongsDeletePopupComponent implements OnInit, OnDestroy {
+export class SongDeletePopupComponent implements OnInit, OnDestroy {
   protected ngbModalRef: NgbModalRef;
 
   constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ songs }) => {
+    this.activatedRoute.data.subscribe(({ Song }) => {
       setTimeout(() => {
-        this.ngbModalRef = this.modalService.open(SongsDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static' });
-        this.ngbModalRef.componentInstance.songs = songs;
+        this.ngbModalRef = this.modalService.open(SongDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static' });
+        this.ngbModalRef.componentInstance.Song = Song;
         this.ngbModalRef.result.then(
           result => {
-            this.router.navigate(['/songs', { outlets: { popup: null } }]);
+            this.router.navigate(['/Song', { outlets: { popup: null } }]);
             this.ngbModalRef = null;
           },
           reason => {
-            this.router.navigate(['/songs', { outlets: { popup: null } }]);
+            this.router.navigate(['/Song', { outlets: { popup: null } }]);
             this.ngbModalRef = null;
           }
         );

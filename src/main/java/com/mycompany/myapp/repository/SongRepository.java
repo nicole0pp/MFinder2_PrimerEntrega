@@ -1,15 +1,15 @@
 package com.mycompany.myapp.repository;
 
-import com.mycompany.myapp.domain.Songs;
+import com.mycompany.myapp.domain.Song;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
 
 /**
- * Spring Data  repository for the Songs entity.
+ * Spring Data  repository for the Song entity.
  */
 @SuppressWarnings("unused")
 @Repository
-public interface SongsRepository extends JpaRepository<Songs, Long> {
+public interface SongRepository extends JpaRepository<Song, Long> {
 
 }

@@ -3,7 +3,7 @@
     "fields": [],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
+            "relationshipType": "many-to-one",
             "otherEntityName": "FavoriteList",
             "otherEntityRelationshipName": "listDetails",
             "relationshipName": "list",
@@ -12,7 +12,7 @@
         },
         {
             "relationshipType": "one-to-many",
-            "otherEntityName": "songs",
+            "otherEntityName": "Song",
             "otherEntityRelationshipName": "listDetails",
             "relationshipName": "song"
         }

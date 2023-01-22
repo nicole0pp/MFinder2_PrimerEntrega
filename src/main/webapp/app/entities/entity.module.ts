@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     RouterModule.forChild([
       {
-        path: 'songs',
-        loadChildren: './songs/songs.module#MFinder2SongsModule'
+        path: 'Song',
+        loadChildren: './Song/Song.module#MFinder2SongModule'
       },
       {
         path: 'Album',

@@ -2,6 +2,8 @@ package com.mycompany.myapp.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -26,13 +28,15 @@ public class ListDetails implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private FavoriteList list;
+    @ManyToOne
+    @JsonIgnoreProperties("ListDetails")
+    private FavoriteList List;
+    // @JoinColumn(unique = true)
+    // private FavoriteList list;
 
     @OneToMany(mappedBy = "listDetails")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Songs> songs = new HashSet<>();
+    private Set<Song> Song = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -44,41 +48,41 @@ public class ListDetails implements Serializable {
     }
 
     public FavoriteList getList() {
-        return list;
+        return List;
     }
 
     public ListDetails list(FavoriteList FavoriteList) {
-        this.list = FavoriteList;
+        this.List = FavoriteList;
         return this;
     }
 
     public void setList(FavoriteList FavoriteList) {
-        this.list = FavoriteList;
+        this.List = FavoriteList;
     }
 
-    public Set<Songs> getSongs() {
-        return songs;
+    public Set<Song> getSong() {
+        return Song;
     }
 
-    public ListDetails songs(Set<Songs> songs) {
-        this.songs = songs;
+    public ListDetails Song(Set<Song> Song) {
+        this.Song = Song;
         return this;
     }
 
-    public ListDetails addSong(Songs songs) {
-        this.songs.add(songs);
-        songs.setListDetails(this);
+    public ListDetails addSong(Song Song) {
+        this.Song.add(Song);
+        Song.setListDetails(this);
         return this;
     }
 
-    public ListDetails removeSong(Songs songs) {
-        this.songs.remove(songs);
-        songs.setListDetails(null);
+    public ListDetails removeSong(Song Song) {
+        this.Song.remove(Song);
+        Song.setListDetails(null);
         return this;
     }
 
-    public void setSongs(Set<Songs> songs) {
-        this.songs = songs;
+    public void setSong(Set<Song> Song) {
+        this.Song = Song;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

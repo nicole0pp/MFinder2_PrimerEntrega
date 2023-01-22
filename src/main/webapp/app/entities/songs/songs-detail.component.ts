@@ -2,20 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
-import { ISongs } from 'app/shared/model/songs.model';
+import { ISong } from 'app/shared/model/Song.model';
 
 @Component({
-  selector: 'jhi-songs-detail',
-  templateUrl: './songs-detail.component.html'
+  selector: 'jhi-Song-detail',
+  templateUrl: './Song-detail.component.html'
 })
-export class SongsDetailComponent implements OnInit {
-  songs: ISongs;
+export class SongDetailComponent implements OnInit {
+  Song: ISong;
 
   constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ songs }) => {
-      this.songs = songs;
+    this.activatedRoute.data.subscribe(({ Song }) => {
+      this.Song = Song;
     });
   }
 

@@ -5,25 +5,25 @@ import { JhiLanguageHelper } from 'app/core';
 
 import { MFinder2SharedModule } from 'app/shared';
 import {
-  SongsComponent,
-  SongsDetailComponent,
-  SongsUpdateComponent,
-  SongsDeletePopupComponent,
-  SongsDeleteDialogComponent,
-  songsRoute,
-  songsPopupRoute
+  SongComponent,
+  SongDetailComponent,
+  SongUpdateComponent,
+  SongDeletePopupComponent,
+  SongDeleteDialogComponent,
+  SongRoute,
+  SongPopupRoute
 } from './';
 
-const ENTITY_STATES = [...songsRoute, ...songsPopupRoute];
+const ENTITY_STATES = [...SongRoute, ...SongPopupRoute];
 
 @NgModule({
   imports: [MFinder2SharedModule, RouterModule.forChild(ENTITY_STATES)],
-  declarations: [SongsComponent, SongsDetailComponent, SongsUpdateComponent, SongsDeleteDialogComponent, SongsDeletePopupComponent],
-  entryComponents: [SongsComponent, SongsUpdateComponent, SongsDeleteDialogComponent, SongsDeletePopupComponent],
+  declarations: [SongComponent, SongDetailComponent, SongUpdateComponent, SongDeleteDialogComponent, SongDeletePopupComponent],
+  entryComponents: [SongComponent, SongUpdateComponent, SongDeleteDialogComponent, SongDeletePopupComponent],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MFinder2SongsModule {
+export class MFinder2SongModule {
   constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
     this.languageHelper.language.subscribe((languageKey: string) => {
       if (languageKey !== undefined) {

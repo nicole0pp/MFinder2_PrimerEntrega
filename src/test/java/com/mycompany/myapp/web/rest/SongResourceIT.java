@@ -1,11 +1,11 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.MFinder2App;
-import com.mycompany.myapp.domain.Songs;
-import com.mycompany.myapp.repository.SongsRepository;
-import com.mycompany.myapp.service.SongsService;
-import com.mycompany.myapp.service.dto.SongsDTO;
-import com.mycompany.myapp.service.mapper.SongsMapper;
+import com.mycompany.myapp.domain.Song;
+import com.mycompany.myapp.repository.SongRepository;
+import com.mycompany.myapp.service.SongService;
+import com.mycompany.myapp.service.dto.SongDTO;
+import com.mycompany.myapp.service.mapper.SongMapper;
 import com.mycompany.myapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,10 +33,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link SongsResource} REST controller.
+ * Integration tests for the {@Link SongResource} REST controller.
  */
 @SpringBootTest(classes = MFinder2App.class)
-public class SongsResourceIT {
+public class SongResourceIT {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
@@ -58,13 +58,13 @@ public class SongsResourceIT {
     private static final String UPDATED_ARTISTS = "BBBBBBBBBB";
 
     @Autowired
-    private SongsRepository songsRepository;
+    private SongRepository SongRepository;
 
     @Autowired
-    private SongsMapper songsMapper;
+    private SongMapper SongMapper;
 
     @Autowired
-    private SongsService songsService;
+    private SongService SongService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -81,15 +81,15 @@ public class SongsResourceIT {
     @Autowired
     private Validator validator;
 
-    private MockMvc restSongsMockMvc;
+    private MockMvc restSongMockMvc;
 
-    private Songs songs;
+    private Song Song;
 
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final SongsResource songsResource = new SongsResource(songsService);
-        this.restSongsMockMvc = MockMvcBuilders.standaloneSetup(songsResource)
+        final SongResource SongResource = new SongResource(SongService);
+        this.restSongMockMvc = MockMvcBuilders.standaloneSetup(SongResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
@@ -103,8 +103,8 @@ public class SongsResourceIT {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
-    public static Songs createEntity(EntityManager em) {
-        Songs songs = new Songs()
+    public static Song createEntity(EntityManager em) {
+        Song Song = new Song()
             .name(DEFAULT_NAME)
             .picture(DEFAULT_PICTURE)
             .pictureContentType(DEFAULT_PICTURE_CONTENT_TYPE)
@@ -112,90 +112,90 @@ public class SongsResourceIT {
             .audio(DEFAULT_AUDIO)
             .audioContentType(DEFAULT_AUDIO_CONTENT_TYPE)
             .artists(DEFAULT_ARTISTS);
-        return songs;
+        return Song;
     }
 
     @BeforeEach
     public void initTest() {
-        songs = createEntity(em);
+        Song = createEntity(em);
     }
 
     @Test
     @Transactional
-    public void createSongs() throws Exception {
-        int databaseSizeBeforeCreate = songsRepository.findAll().size();
+    public void createSong() throws Exception {
+        int databaseSizeBeforeCreate = SongRepository.findAll().size();
 
-        // Create the Songs
-        SongsDTO songsDTO = songsMapper.toDto(songs);
-        restSongsMockMvc.perform(post("/api/songs")
+        // Create the Song
+        SongDTO SongDTO = SongMapper.toDto(Song);
+        restSongMockMvc.perform(post("/api/Song")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(songsDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(SongDTO)))
             .andExpect(status().isCreated());
 
-        // Validate the Songs in the database
-        List<Songs> songsList = songsRepository.findAll();
-        assertThat(songsList).hasSize(databaseSizeBeforeCreate + 1);
-        Songs testSongs = songsList.get(songsList.size() - 1);
-        assertThat(testSongs.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testSongs.getPicture()).isEqualTo(DEFAULT_PICTURE);
-        assertThat(testSongs.getPictureContentType()).isEqualTo(DEFAULT_PICTURE_CONTENT_TYPE);
-        assertThat(testSongs.getDuration()).isEqualTo(DEFAULT_DURATION);
-        assertThat(testSongs.getAudio()).isEqualTo(DEFAULT_AUDIO);
-        assertThat(testSongs.getAudioContentType()).isEqualTo(DEFAULT_AUDIO_CONTENT_TYPE);
-        assertThat(testSongs.getArtists()).isEqualTo(DEFAULT_ARTISTS);
+        // Validate the Song in the database
+        List<Song> SongList = SongRepository.findAll();
+        assertThat(SongList).hasSize(databaseSizeBeforeCreate + 1);
+        Song testSong = SongList.get(SongList.size() - 1);
+        assertThat(testSong.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testSong.getPicture()).isEqualTo(DEFAULT_PICTURE);
+        assertThat(testSong.getPictureContentType()).isEqualTo(DEFAULT_PICTURE_CONTENT_TYPE);
+        assertThat(testSong.getDuration()).isEqualTo(DEFAULT_DURATION);
+        assertThat(testSong.getAudio()).isEqualTo(DEFAULT_AUDIO);
+        assertThat(testSong.getAudioContentType()).isEqualTo(DEFAULT_AUDIO_CONTENT_TYPE);
+        assertThat(testSong.getArtists()).isEqualTo(DEFAULT_ARTISTS);
     }
 
     @Test
     @Transactional
-    public void createSongsWithExistingId() throws Exception {
-        int databaseSizeBeforeCreate = songsRepository.findAll().size();
+    public void createSongWithExistingId() throws Exception {
+        int databaseSizeBeforeCreate = SongRepository.findAll().size();
 
-        // Create the Songs with an existing ID
-        songs.setId(1L);
-        SongsDTO songsDTO = songsMapper.toDto(songs);
+        // Create the Song with an existing ID
+        Song.setId(1L);
+        SongDTO SongDTO = SongMapper.toDto(Song);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restSongsMockMvc.perform(post("/api/songs")
+        restSongMockMvc.perform(post("/api/Song")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(songsDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(SongDTO)))
             .andExpect(status().isBadRequest());
 
-        // Validate the Songs in the database
-        List<Songs> songsList = songsRepository.findAll();
-        assertThat(songsList).hasSize(databaseSizeBeforeCreate);
+        // Validate the Song in the database
+        List<Song> SongList = SongRepository.findAll();
+        assertThat(SongList).hasSize(databaseSizeBeforeCreate);
     }
 
 
     @Test
     @Transactional
     public void checkNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = songsRepository.findAll().size();
+        int databaseSizeBeforeTest = SongRepository.findAll().size();
         // set the field null
-        songs.setName(null);
+        Song.setName(null);
 
-        // Create the Songs, which fails.
-        SongsDTO songsDTO = songsMapper.toDto(songs);
+        // Create the Song, which fails.
+        SongDTO SongDTO = SongMapper.toDto(Song);
 
-        restSongsMockMvc.perform(post("/api/songs")
+        restSongMockMvc.perform(post("/api/Song")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(songsDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(SongDTO)))
             .andExpect(status().isBadRequest());
 
-        List<Songs> songsList = songsRepository.findAll();
-        assertThat(songsList).hasSize(databaseSizeBeforeTest);
+        List<Song> SongList = SongRepository.findAll();
+        assertThat(SongList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
-    public void getAllSongs() throws Exception {
+    public void getAllSong() throws Exception {
         // Initialize the database
-        songsRepository.saveAndFlush(songs);
+        SongRepository.saveAndFlush(Song);
 
-        // Get all the songsList
-        restSongsMockMvc.perform(get("/api/songs?sort=id,desc"))
+        // Get all the SongList
+        restSongMockMvc.perform(get("/api/Song?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(songs.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(Song.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].pictureContentType").value(hasItem(DEFAULT_PICTURE_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].picture").value(hasItem(Base64Utils.encodeToString(DEFAULT_PICTURE))))
@@ -207,15 +207,15 @@ public class SongsResourceIT {
     
     @Test
     @Transactional
-    public void getSongs() throws Exception {
+    public void getSong() throws Exception {
         // Initialize the database
-        songsRepository.saveAndFlush(songs);
+        SongRepository.saveAndFlush(Song);
 
-        // Get the songs
-        restSongsMockMvc.perform(get("/api/songs/{id}", songs.getId()))
+        // Get the Song
+        restSongMockMvc.perform(get("/api/Song/{id}", Song.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(songs.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(Song.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.pictureContentType").value(DEFAULT_PICTURE_CONTENT_TYPE))
             .andExpect(jsonPath("$.picture").value(Base64Utils.encodeToString(DEFAULT_PICTURE)))
@@ -227,25 +227,25 @@ public class SongsResourceIT {
 
     @Test
     @Transactional
-    public void getNonExistingSongs() throws Exception {
-        // Get the songs
-        restSongsMockMvc.perform(get("/api/songs/{id}", Long.MAX_VALUE))
+    public void getNonExistingSong() throws Exception {
+        // Get the Song
+        restSongMockMvc.perform(get("/api/Song/{id}", Long.MAX_VALUE))
             .andExpect(status().isNotFound());
     }
 
     @Test
     @Transactional
-    public void updateSongs() throws Exception {
+    public void updateSong() throws Exception {
         // Initialize the database
-        songsRepository.saveAndFlush(songs);
+        SongRepository.saveAndFlush(Song);
 
-        int databaseSizeBeforeUpdate = songsRepository.findAll().size();
+        int databaseSizeBeforeUpdate = SongRepository.findAll().size();
 
-        // Update the songs
-        Songs updatedSongs = songsRepository.findById(songs.getId()).get();
-        // Disconnect from session so that the updates on updatedSongs are not directly saved in db
-        em.detach(updatedSongs);
-        updatedSongs
+        // Update the Song
+        Song updatedSong = SongRepository.findById(Song.getId()).get();
+        // Disconnect from session so that the updates on updatedSong are not directly saved in db
+        em.detach(updatedSong);
+        updatedSong
             .name(UPDATED_NAME)
             .picture(UPDATED_PICTURE)
             .pictureContentType(UPDATED_PICTURE_CONTENT_TYPE)
@@ -253,98 +253,98 @@ public class SongsResourceIT {
             .audio(UPDATED_AUDIO)
             .audioContentType(UPDATED_AUDIO_CONTENT_TYPE)
             .artists(UPDATED_ARTISTS);
-        SongsDTO songsDTO = songsMapper.toDto(updatedSongs);
+        SongDTO SongDTO = SongMapper.toDto(updatedSong);
 
-        restSongsMockMvc.perform(put("/api/songs")
+        restSongMockMvc.perform(put("/api/Song")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(songsDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(SongDTO)))
             .andExpect(status().isOk());
 
-        // Validate the Songs in the database
-        List<Songs> songsList = songsRepository.findAll();
-        assertThat(songsList).hasSize(databaseSizeBeforeUpdate);
-        Songs testSongs = songsList.get(songsList.size() - 1);
-        assertThat(testSongs.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testSongs.getPicture()).isEqualTo(UPDATED_PICTURE);
-        assertThat(testSongs.getPictureContentType()).isEqualTo(UPDATED_PICTURE_CONTENT_TYPE);
-        assertThat(testSongs.getDuration()).isEqualTo(UPDATED_DURATION);
-        assertThat(testSongs.getAudio()).isEqualTo(UPDATED_AUDIO);
-        assertThat(testSongs.getAudioContentType()).isEqualTo(UPDATED_AUDIO_CONTENT_TYPE);
-        assertThat(testSongs.getArtists()).isEqualTo(UPDATED_ARTISTS);
+        // Validate the Song in the database
+        List<Song> SongList = SongRepository.findAll();
+        assertThat(SongList).hasSize(databaseSizeBeforeUpdate);
+        Song testSong = SongList.get(SongList.size() - 1);
+        assertThat(testSong.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testSong.getPicture()).isEqualTo(UPDATED_PICTURE);
+        assertThat(testSong.getPictureContentType()).isEqualTo(UPDATED_PICTURE_CONTENT_TYPE);
+        assertThat(testSong.getDuration()).isEqualTo(UPDATED_DURATION);
+        assertThat(testSong.getAudio()).isEqualTo(UPDATED_AUDIO);
+        assertThat(testSong.getAudioContentType()).isEqualTo(UPDATED_AUDIO_CONTENT_TYPE);
+        assertThat(testSong.getArtists()).isEqualTo(UPDATED_ARTISTS);
     }
 
     @Test
     @Transactional
-    public void updateNonExistingSongs() throws Exception {
-        int databaseSizeBeforeUpdate = songsRepository.findAll().size();
+    public void updateNonExistingSong() throws Exception {
+        int databaseSizeBeforeUpdate = SongRepository.findAll().size();
 
-        // Create the Songs
-        SongsDTO songsDTO = songsMapper.toDto(songs);
+        // Create the Song
+        SongDTO SongDTO = SongMapper.toDto(Song);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restSongsMockMvc.perform(put("/api/songs")
+        restSongMockMvc.perform(put("/api/Song")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(songsDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(SongDTO)))
             .andExpect(status().isBadRequest());
 
-        // Validate the Songs in the database
-        List<Songs> songsList = songsRepository.findAll();
-        assertThat(songsList).hasSize(databaseSizeBeforeUpdate);
+        // Validate the Song in the database
+        List<Song> SongList = SongRepository.findAll();
+        assertThat(SongList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    public void deleteSongs() throws Exception {
+    public void deleteSong() throws Exception {
         // Initialize the database
-        songsRepository.saveAndFlush(songs);
+        SongRepository.saveAndFlush(Song);
 
-        int databaseSizeBeforeDelete = songsRepository.findAll().size();
+        int databaseSizeBeforeDelete = SongRepository.findAll().size();
 
-        // Delete the songs
-        restSongsMockMvc.perform(delete("/api/songs/{id}", songs.getId())
+        // Delete the Song
+        restSongMockMvc.perform(delete("/api/Song/{id}", Song.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
         // Validate the database is empty
-        List<Songs> songsList = songsRepository.findAll();
-        assertThat(songsList).hasSize(databaseSizeBeforeDelete - 1);
+        List<Song> SongList = SongRepository.findAll();
+        assertThat(SongList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
     @Test
     @Transactional
     public void equalsVerifier() throws Exception {
-        TestUtil.equalsVerifier(Songs.class);
-        Songs songs1 = new Songs();
-        songs1.setId(1L);
-        Songs songs2 = new Songs();
-        songs2.setId(songs1.getId());
-        assertThat(songs1).isEqualTo(songs2);
-        songs2.setId(2L);
-        assertThat(songs1).isNotEqualTo(songs2);
-        songs1.setId(null);
-        assertThat(songs1).isNotEqualTo(songs2);
+        TestUtil.equalsVerifier(Song.class);
+        Song Song1 = new Song();
+        Song1.setId(1L);
+        Song Song2 = new Song();
+        Song2.setId(Song1.getId());
+        assertThat(Song1).isEqualTo(Song2);
+        Song2.setId(2L);
+        assertThat(Song1).isNotEqualTo(Song2);
+        Song1.setId(null);
+        assertThat(Song1).isNotEqualTo(Song2);
     }
 
     @Test
     @Transactional
     public void dtoEqualsVerifier() throws Exception {
-        TestUtil.equalsVerifier(SongsDTO.class);
-        SongsDTO songsDTO1 = new SongsDTO();
-        songsDTO1.setId(1L);
-        SongsDTO songsDTO2 = new SongsDTO();
-        assertThat(songsDTO1).isNotEqualTo(songsDTO2);
-        songsDTO2.setId(songsDTO1.getId());
-        assertThat(songsDTO1).isEqualTo(songsDTO2);
-        songsDTO2.setId(2L);
-        assertThat(songsDTO1).isNotEqualTo(songsDTO2);
-        songsDTO1.setId(null);
-        assertThat(songsDTO1).isNotEqualTo(songsDTO2);
+        TestUtil.equalsVerifier(SongDTO.class);
+        SongDTO SongDTO1 = new SongDTO();
+        SongDTO1.setId(1L);
+        SongDTO SongDTO2 = new SongDTO();
+        assertThat(SongDTO1).isNotEqualTo(SongDTO2);
+        SongDTO2.setId(SongDTO1.getId());
+        assertThat(SongDTO1).isEqualTo(SongDTO2);
+        SongDTO2.setId(2L);
+        assertThat(SongDTO1).isNotEqualTo(SongDTO2);
+        SongDTO1.setId(null);
+        assertThat(SongDTO1).isNotEqualTo(SongDTO2);
     }
 
     @Test
     @Transactional
     public void testEntityFromId() {
-        assertThat(songsMapper.fromId(42L).getId()).isEqualTo(42);
-        assertThat(songsMapper.fromId(null)).isNull();
+        assertThat(SongMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(SongMapper.fromId(null)).isNull();
     }
 }

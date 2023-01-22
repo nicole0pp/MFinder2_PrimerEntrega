@@ -1,4 +1,4 @@
-export interface ISongs {
+export interface ISong {
   id?: number;
   name?: string;
   pictureContentType?: string;
@@ -12,7 +12,7 @@ export interface ISongs {
   listDetailsId?: number;
 }
 
-export class Songs implements ISongs {
+export class Song implements ISong {
   constructor(
     public id?: number,
     public name?: string,

@@ -1,5 +1,5 @@
 
-entity Songs {
+entity Song {
 	name String required,
     picture Blob
     duration Duration,
@@ -27,13 +27,13 @@ entity MusicGenre{
 }
 
 relationship OneToMany{
-	 ListDetails{song} to Songs
+	 ListDetails{song} to Song
 }
 relationship ManyToOne {
-    Songs{Album} to Album
+    Song{Album} to Album
 }
 relationship OneToOne {
-    Songs{musicGenre} to MusicGenre,
+    Song{musicGenre} to MusicGenre,
     ListDetails{list} to FavoriteList
 }
 

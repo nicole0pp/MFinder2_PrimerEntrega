@@ -5,8 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
-import { ISongs, Songs } from 'app/shared/model/songs.model';
-import { SongsService } from './songs.service';
+import { ISong, Song } from 'app/shared/model/Song.model';
+import { SongService } from './Song.service';
 import { IMusicGenre } from 'app/shared/model/music-genres.model';
 import { MusicGenreService } from 'app/entities/music-genres';
 import { IAlbum } from 'app/shared/model/Album.model';
@@ -15,11 +15,11 @@ import { IListDetails } from 'app/shared/model/list-details.model';
 import { ListDetailsService } from 'app/entities/list-details';
 
 @Component({
-  selector: 'jhi-songs-update',
-  templateUrl: './songs-update.component.html'
+  selector: 'jhi-Song-update',
+  templateUrl: './Song-update.component.html'
 })
-export class SongsUpdateComponent implements OnInit {
-  songs: ISongs;
+export class SongUpdateComponent implements OnInit {
+  Song: ISong;
   isSaving: boolean;
 
   MusicGenre: IMusicGenre[];
@@ -45,7 +45,7 @@ export class SongsUpdateComponent implements OnInit {
   constructor(
     protected dataUtils: JhiDataUtils,
     protected jhiAlertService: JhiAlertService,
-    protected songsService: SongsService,
+    protected SongService: SongService,
     protected MusicGenreService: MusicGenreService,
     protected AlbumService: AlbumService,
     protected listDetailsService: ListDetailsService,
@@ -55,21 +55,21 @@ export class SongsUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.isSaving = false;
-    this.activatedRoute.data.subscribe(({ songs }) => {
-      this.updateForm(songs);
-      this.songs = songs;
+    this.activatedRoute.data.subscribe(({ Song }) => {
+      this.updateForm(Song);
+      this.Song = Song;
     });
-    this.MusicGenreService.query({ filter: 'songs-is-null' })
+    this.MusicGenreService.query({ filter: 'Song-is-null' })
       .pipe(
         filter((mayBeOk: HttpResponse<IMusicGenre[]>) => mayBeOk.ok),
         map((response: HttpResponse<IMusicGenre[]>) => response.body)
       )
       .subscribe(
         (res: IMusicGenre[]) => {
-          if (!this.songs.musicGenreId) {
+          if (!this.Song.musicGenreId) {
             this.MusicGenre = res;
           } else {
-            this.MusicGenreService.find(this.songs.musicGenreId)
+            this.MusicGenreService.find(this.Song.musicGenreId)
               .pipe(
                 filter((subResMayBeOk: HttpResponse<IMusicGenre>) => subResMayBeOk.ok),
                 map((subResponse: HttpResponse<IMusicGenre>) => subResponse.body)
@@ -97,19 +97,19 @@ export class SongsUpdateComponent implements OnInit {
       .subscribe((res: IListDetails[]) => (this.listdetails = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
-  updateForm(songs: ISongs) {
+  updateForm(Song: ISong) {
     this.editForm.patchValue({
-      id: songs.id,
-      name: songs.name,
-      picture: songs.picture,
-      pictureContentType: songs.pictureContentType,
-      duration: songs.duration,
-      audio: songs.audio,
-      audioContentType: songs.audioContentType,
-      artists: songs.artists,
-      musicGenreId: songs.musicGenreId,
-      AlbumId: songs.AlbumId,
-      listDetailsId: songs.listDetailsId
+      id: Song.id,
+      name: Song.name,
+      picture: Song.picture,
+      pictureContentType: Song.pictureContentType,
+      duration: Song.duration,
+      audio: Song.audio,
+      audioContentType: Song.audioContentType,
+      artists: Song.artists,
+      musicGenreId: Song.musicGenreId,
+      AlbumId: Song.AlbumId,
+      listDetailsId: Song.listDetailsId
     });
   }
 
@@ -151,17 +151,17 @@ export class SongsUpdateComponent implements OnInit {
 
   save() {
     this.isSaving = true;
-    const songs = this.createFromForm();
-    if (songs.id !== undefined) {
-      this.subscribeToSaveResponse(this.songsService.update(songs));
+    const Song = this.createFromForm();
+    if (Song.id !== undefined) {
+      this.subscribeToSaveResponse(this.SongService.update(Song));
     } else {
-      this.subscribeToSaveResponse(this.songsService.create(songs));
+      this.subscribeToSaveResponse(this.SongService.create(Song));
     }
   }
 
-  private createFromForm(): ISongs {
+  private createFromForm(): ISong {
     const entity = {
-      ...new Songs(),
+      ...new Song(),
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
       pictureContentType: this.editForm.get(['pictureContentType']).value,
@@ -177,8 +177,8 @@ export class SongsUpdateComponent implements OnInit {
     return entity;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<ISongs>>) {
-    result.subscribe((res: HttpResponse<ISongs>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<ISong>>) {
+    result.subscribe((res: HttpResponse<ISong>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
   }
 
   protected onSaveSuccess() {

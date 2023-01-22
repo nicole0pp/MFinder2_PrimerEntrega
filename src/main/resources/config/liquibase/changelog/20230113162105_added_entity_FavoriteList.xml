@@ -48,7 +48,7 @@
     -->
     <changeSet id="20230113162105-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/data/reproduction_lists.csv"
+                  file="config/liquibase/data/favorite_list.csv"
                   separator=";"
                   tableName="reproduction_lists"
                   context="dev">

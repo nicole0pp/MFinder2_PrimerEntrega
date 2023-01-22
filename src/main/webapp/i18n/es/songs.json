@@ -1,19 +1,19 @@
 {
   "mFinder2App": {
-    "songs": {
+    "Song": {
       "home": {
-        "title": "Songs",
-        "createLabel": "Crear nuevo Songs",
-        "createOrEditLabel": "Crear o editar Songs"
+        "title": "Song",
+        "createLabel": "Crear nuevo Song",
+        "createOrEditLabel": "Crear o editar Song"
       },
-      "created": "Un nuevo Songs ha sido creado con el identificador {{ param }}",
-      "updated": "Un Songs ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Songs ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nuevo Song ha sido creado con el identificador {{ param }}",
+      "updated": "Un Song ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Song ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Songs {{ id }}?"
+        "question": "¿Seguro que quiere eliminar Song {{ id }}?"
       },
       "detail": {
-        "title": "Songs"
+        "title": "Song"
       },
       "name": "Nombre: ",
       "picture": "Imagen: ",

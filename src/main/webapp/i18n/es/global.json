@@ -7,7 +7,7 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",
-        "songs": "Songs",
+        "Song": "Song",
         "Album": "Album",
         "FavoriteList": "Reproduction Lists",
         "listDetails": "List Details",

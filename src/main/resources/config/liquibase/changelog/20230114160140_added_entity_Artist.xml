@@ -25,7 +25,9 @@
             <column name="artistic_name" type="varchar(255)">
                 <constraints nullable="false" unique="true" uniqueConstraintName="ux_artist_artistic_name" />
             </column>
-
+            <column name="user_artist_id" type="bigint" >
+                <constraints unique="true" nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
 

@@ -33,7 +33,7 @@ public class Artist implements Serializable {
     }
 
     @OneToOne
-    @MapsId
+    @JoinColumn(unique=true)
     private User user;
 
     public void setId(Long id) {

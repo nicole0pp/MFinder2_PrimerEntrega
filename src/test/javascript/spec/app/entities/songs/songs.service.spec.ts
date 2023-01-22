@@ -4,15 +4,15 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
-import { SongsService } from 'app/entities/songs/songs.service';
-import { ISongs, Songs } from 'app/shared/model/songs.model';
+import { SongService } from 'app/entities/Song/Song.service';
+import { ISong, Song } from 'app/shared/model/Song.model';
 
 describe('Service Tests', () => {
-  describe('Songs Service', () => {
+  describe('Song Service', () => {
     let injector: TestBed;
-    let service: SongsService;
+    let service: SongService;
     let httpMock: HttpTestingController;
-    let elemDefault: ISongs;
+    let elemDefault: ISong;
     let expectedResult;
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -20,10 +20,10 @@ describe('Service Tests', () => {
       });
       expectedResult = {};
       injector = getTestBed();
-      service = injector.get(SongsService);
+      service = injector.get(SongService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Songs(0, 'AAAAAAA', 'image/png', 'AAAAAAA', 0, 'image/png', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Song(0, 'AAAAAAA', 'image/png', 'AAAAAAA', 0, 'image/png', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -39,7 +39,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: elemDefault });
       });
 
-      it('should create a Songs', async () => {
+      it('should create a Song', async () => {
         const returnedFromService = Object.assign(
           {
             id: 0
@@ -48,7 +48,7 @@ describe('Service Tests', () => {
         );
         const expected = Object.assign({}, returnedFromService);
         service
-          .create(new Songs(null))
+          .create(new Song(null))
           .pipe(take(1))
           .subscribe(resp => (expectedResult = resp));
         const req = httpMock.expectOne({ method: 'POST' });
@@ -56,7 +56,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: expected });
       });
 
-      it('should update a Songs', async () => {
+      it('should update a Song', async () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
@@ -78,7 +78,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: expected });
       });
 
-      it('should return a list of Songs', async () => {
+      it('should return a list of Song', async () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
@@ -103,7 +103,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a Songs', async () => {
+      it('should delete a Song', async () => {
         const rxPromise = service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });

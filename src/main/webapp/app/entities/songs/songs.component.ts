@@ -5,20 +5,20 @@ import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
-import { ISongs } from 'app/shared/model/songs.model';
+import { ISong } from 'app/shared/model/Song.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { SongsService } from './songs.service';
+import { SongService } from './Song.service';
 
 @Component({
-  selector: 'jhi-songs',
-  templateUrl: './songs.component.html',
+  selector: 'jhi-Song',
+  templateUrl: './Song.component.html',
   styleUrls: ['song.scss']
 })
-export class SongsComponent implements OnInit, OnDestroy {
+export class SongComponent implements OnInit, OnDestroy {
   currentAccount: any;
-  songs: ISongs[];
+  Song: ISong[];
   error: any;
   success: any;
   eventSubscriber: Subscription;
@@ -32,7 +32,7 @@ export class SongsComponent implements OnInit, OnDestroy {
   reverse: any;
 
   constructor(
-    protected songsService: SongsService,
+    protected SongService: SongService,
     protected parseLinks: JhiParseLinks,
     protected jhiAlertService: JhiAlertService,
     protected accountService: AccountService,
@@ -51,16 +51,14 @@ export class SongsComponent implements OnInit, OnDestroy {
   }
 
   loadAll() {
-    this.songsService
-      .query({
-        page: this.page - 1,
-        size: this.itemsPerPage,
-        sort: this.sort()
-      })
-      .subscribe(
-        (res: HttpResponse<ISongs[]>) => this.paginateSongs(res.body, res.headers),
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
+    this.SongService.query({
+      page: this.page - 1,
+      size: this.itemsPerPage,
+      sort: this.sort()
+    }).subscribe(
+      (res: HttpResponse<ISong[]>) => this.paginateSong(res.body, res.headers),
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   loadPage(page: number) {
@@ -71,7 +69,7 @@ export class SongsComponent implements OnInit, OnDestroy {
   }
 
   transition() {
-    this.router.navigate(['/songs'], {
+    this.router.navigate(['/Song'], {
       queryParams: {
         page: this.page,
         size: this.itemsPerPage,
@@ -84,7 +82,7 @@ export class SongsComponent implements OnInit, OnDestroy {
   clear() {
     this.page = 0;
     this.router.navigate([
-      '/songs',
+      '/Song',
       {
         page: this.page,
         sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -98,14 +96,14 @@ export class SongsComponent implements OnInit, OnDestroy {
     this.accountService.identity().then(account => {
       this.currentAccount = account;
     });
-    this.registerChangeInSongs();
+    this.registerChangeInSong();
   }
 
   ngOnDestroy() {
     this.eventManager.destroy(this.eventSubscriber);
   }
 
-  trackId(index: number, item: ISongs) {
+  trackId(index: number, item: ISong) {
     return item.id;
   }
 
@@ -117,8 +115,8 @@ export class SongsComponent implements OnInit, OnDestroy {
     return this.dataUtils.openFile(contentType, field);
   }
 
-  registerChangeInSongs() {
-    this.eventSubscriber = this.eventManager.subscribe('songsListModification', response => this.loadAll());
+  registerChangeInSong() {
+    this.eventSubscriber = this.eventManager.subscribe('SongListModification', response => this.loadAll());
   }
 
   sort() {
@@ -129,10 +127,10 @@ export class SongsComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  protected paginateSongs(data: ISongs[], headers: HttpHeaders) {
+  protected paginateSong(data: ISong[], headers: HttpHeaders) {
     this.links = this.parseLinks.parse(headers.get('link'));
     this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
-    this.songs = data;
+    this.Song = data;
   }
 
   protected onError(errorMessage: string) {

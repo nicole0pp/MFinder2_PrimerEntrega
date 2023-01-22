@@ -5,34 +5,34 @@ import { FormBuilder } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { SongsUpdateComponent } from 'app/entities/songs/songs-update.component';
-import { SongsService } from 'app/entities/songs/songs.service';
-import { Songs } from 'app/shared/model/songs.model';
+import { SongUpdateComponent } from 'app/entities/Song/Song-update.component';
+import { SongService } from 'app/entities/Song/Song.service';
+import { Song } from 'app/shared/model/Song.model';
 
 describe('Component Tests', () => {
-  describe('Songs Management Update Component', () => {
-    let comp: SongsUpdateComponent;
-    let fixture: ComponentFixture<SongsUpdateComponent>;
-    let service: SongsService;
+  describe('Song Management Update Component', () => {
+    let comp: SongUpdateComponent;
+    let fixture: ComponentFixture<SongUpdateComponent>;
+    let service: SongService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [SongsUpdateComponent],
+        declarations: [SongUpdateComponent],
         providers: [FormBuilder]
       })
-        .overrideTemplate(SongsUpdateComponent, '')
+        .overrideTemplate(SongUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(SongsUpdateComponent);
+      fixture = TestBed.createComponent(SongUpdateComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(SongsService);
+      service = fixture.debugElement.injector.get(SongService);
     });
 
     describe('save', () => {
       it('Should call update service on save for existing entity', fakeAsync(() => {
         // GIVEN
-        const entity = new Songs(123);
+        const entity = new Song(123);
         spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN
@@ -46,7 +46,7 @@ describe('Component Tests', () => {
 
       it('Should call create service on save for new entity', fakeAsync(() => {
         // GIVEN
-        const entity = new Songs();
+        const entity = new Song();
         spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN

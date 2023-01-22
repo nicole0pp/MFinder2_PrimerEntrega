@@ -1,11 +1,11 @@
-import { ISongs } from 'app/shared/model/songs.model';
+import { ISong } from 'app/shared/model/Song.model';
 
 export interface IListDetails {
   id?: number;
   listId?: number;
-  songs?: ISongs[];
+  Song?: ISong[];
 }
 
 export class ListDetails implements IListDetails {
-  constructor(public id?: number, public listId?: number, public songs?: ISongs[]) {}
+  constructor(public id?: number, public listId?: number, public Song?: ISong[]) {}
 }

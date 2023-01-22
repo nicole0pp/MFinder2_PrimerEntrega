@@ -5,92 +5,92 @@ import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Songs } from 'app/shared/model/songs.model';
-import { SongsService } from './songs.service';
-import { SongsComponent } from './songs.component';
-import { SongsDetailComponent } from './songs-detail.component';
-import { SongsUpdateComponent } from './songs-update.component';
-import { SongsDeletePopupComponent } from './songs-delete-dialog.component';
-import { ISongs } from 'app/shared/model/songs.model';
+import { Song } from 'app/shared/model/Song.model';
+import { SongService } from './Song.service';
+import { SongComponent } from './Song.component';
+import { SongDetailComponent } from './Song-detail.component';
+import { SongUpdateComponent } from './Song-update.component';
+import { SongDeletePopupComponent } from './Song-delete-dialog.component';
+import { ISong } from 'app/shared/model/Song.model';
 
 @Injectable({ providedIn: 'root' })
-export class SongsResolve implements Resolve<ISongs> {
-  constructor(private service: SongsService) {}
+export class SongResolve implements Resolve<ISong> {
+  constructor(private service: SongService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ISongs> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ISong> {
     const id = route.params['id'] ? route.params['id'] : null;
     if (id) {
       return this.service.find(id).pipe(
-        filter((response: HttpResponse<Songs>) => response.ok),
-        map((songs: HttpResponse<Songs>) => songs.body)
+        filter((response: HttpResponse<Song>) => response.ok),
+        map((Song: HttpResponse<Song>) => Song.body)
       );
     }
-    return of(new Songs());
+    return of(new Song());
   }
 }
 
-export const songsRoute: Routes = [
+export const SongRoute: Routes = [
   {
     path: '',
-    component: SongsComponent,
+    component: SongComponent,
     resolve: {
       pagingParams: JhiResolvePagingParams
     },
     data: {
       authorities: ['ROLE_USER', 'ROLE_USER_ARTIST'],
       defaultSort: 'id,asc',
-      pageTitle: 'mFinder2App.songs.home.title'
+      pageTitle: 'mFinder2App.Song.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/view',
-    component: SongsDetailComponent,
+    component: SongDetailComponent,
     resolve: {
-      songs: SongsResolve
+      Song: SongResolve
     },
     data: {
       authorities: ['ROLE_USER', 'ROLE_USER_ARTIST'],
-      pageTitle: 'mFinder2App.songs.home.title'
+      pageTitle: 'mFinder2App.Song.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: 'new',
-    component: SongsUpdateComponent,
+    component: SongUpdateComponent,
     resolve: {
-      songs: SongsResolve
+      Song: SongResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mFinder2App.songs.home.title'
+      pageTitle: 'mFinder2App.Song.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/edit',
-    component: SongsUpdateComponent,
+    component: SongUpdateComponent,
     resolve: {
-      songs: SongsResolve
+      Song: SongResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mFinder2App.songs.home.title'
+      pageTitle: 'mFinder2App.Song.home.title'
     },
     canActivate: [UserRouteAccessService]
   }
 ];
 
-export const songsPopupRoute: Routes = [
+export const SongPopupRoute: Routes = [
   {
     path: ':id/delete',
-    component: SongsDeletePopupComponent,
+    component: SongDeletePopupComponent,
     resolve: {
-      songs: SongsResolve
+      Song: SongResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mFinder2App.songs.home.title'
+      pageTitle: 'mFinder2App.Song.home.title'
     },
     canActivate: [UserRouteAccessService],
     outlet: 'popup'

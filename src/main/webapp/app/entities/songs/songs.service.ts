@@ -4,32 +4,32 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { ISongs } from 'app/shared/model/songs.model';
+import { ISong } from 'app/shared/model/Song.model';
 
-type EntityResponseType = HttpResponse<ISongs>;
-type EntityArrayResponseType = HttpResponse<ISongs[]>;
+type EntityResponseType = HttpResponse<ISong>;
+type EntityArrayResponseType = HttpResponse<ISong[]>;
 
 @Injectable({ providedIn: 'root' })
-export class SongsService {
-  public resourceUrl = SERVER_API_URL + 'api/songs';
+export class SongService {
+  public resourceUrl = SERVER_API_URL + 'api/Song';
 
   constructor(protected http: HttpClient) {}
 
-  create(songs: ISongs): Observable<EntityResponseType> {
-    return this.http.post<ISongs>(this.resourceUrl, songs, { observe: 'response' });
+  create(Song: ISong): Observable<EntityResponseType> {
+    return this.http.post<ISong>(this.resourceUrl, Song, { observe: 'response' });
   }
 
-  update(songs: ISongs): Observable<EntityResponseType> {
-    return this.http.put<ISongs>(this.resourceUrl, songs, { observe: 'response' });
+  update(Song: ISong): Observable<EntityResponseType> {
+    return this.http.put<ISong>(this.resourceUrl, Song, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<ISongs>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.get<ISong>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<ISongs[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<ISong[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<any>> {
