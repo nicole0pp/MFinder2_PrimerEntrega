@@ -9,7 +9,7 @@ entity Songs {
 
 // an ignored comment
 /** not an ignored comment */
-entity Albums{
+entity Album{
 	name String required,
     picture Blob,
     publicationDate LocalDate,
@@ -21,7 +21,7 @@ entity FavoriteList{
 entity ListDetails{}
 
 
-entity MusicGenres{
+entity MusicGenre{
 	name String required,
     type String
 }
@@ -30,10 +30,10 @@ relationship OneToMany{
 	 ListDetails{song} to Songs
 }
 relationship ManyToOne {
-    Songs{album} to Albums
+    Songs{Album} to Album
 }
 relationship OneToOne {
-    Songs{musicGenre} to MusicGenres,
+    Songs{musicGenre} to MusicGenre,
     ListDetails{list} to FavoriteList
 }
 

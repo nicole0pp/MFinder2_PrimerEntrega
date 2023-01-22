@@ -5,92 +5,92 @@ import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { MusicGenres } from 'app/shared/model/music-genres.model';
-import { MusicGenresService } from './music-genres.service';
-import { MusicGenresComponent } from './music-genres.component';
-import { MusicGenresDetailComponent } from './music-genres-detail.component';
-import { MusicGenresUpdateComponent } from './music-genres-update.component';
-import { MusicGenresDeletePopupComponent } from './music-genres-delete-dialog.component';
-import { IMusicGenres } from 'app/shared/model/music-genres.model';
+import { MusicGenre } from 'app/shared/model/music-genres.model';
+import { MusicGenreService } from './music-genres.service';
+import { MusicGenreComponent } from './music-genres.component';
+import { MusicGenreDetailComponent } from './music-genres-detail.component';
+import { MusicGenreUpdateComponent } from './music-genres-update.component';
+import { MusicGenreDeletePopupComponent } from './music-genres-delete-dialog.component';
+import { IMusicGenre } from 'app/shared/model/music-genres.model';
 
 @Injectable({ providedIn: 'root' })
-export class MusicGenresResolve implements Resolve<IMusicGenres> {
-  constructor(private service: MusicGenresService) {}
+export class MusicGenreResolve implements Resolve<IMusicGenre> {
+  constructor(private service: MusicGenreService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IMusicGenres> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IMusicGenre> {
     const id = route.params['id'] ? route.params['id'] : null;
     if (id) {
       return this.service.find(id).pipe(
-        filter((response: HttpResponse<MusicGenres>) => response.ok),
-        map((musicGenres: HttpResponse<MusicGenres>) => musicGenres.body)
+        filter((response: HttpResponse<MusicGenre>) => response.ok),
+        map((MusicGenre: HttpResponse<MusicGenre>) => MusicGenre.body)
       );
     }
-    return of(new MusicGenres());
+    return of(new MusicGenre());
   }
 }
 
-export const musicGenresRoute: Routes = [
+export const MusicGenreRoute: Routes = [
   {
     path: '',
-    component: MusicGenresComponent,
+    component: MusicGenreComponent,
     resolve: {
       pagingParams: JhiResolvePagingParams
     },
     data: {
       authorities: ['ROLE_USER', 'ROLE_USER_ARTIST'],
       defaultSort: 'id,asc',
-      pageTitle: 'mFinder2App.musicGenres.home.title'
+      pageTitle: 'mFinder2App.MusicGenre.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/view',
-    component: MusicGenresDetailComponent,
+    component: MusicGenreDetailComponent,
     resolve: {
-      musicGenres: MusicGenresResolve
+      MusicGenre: MusicGenreResolve
     },
     data: {
       authorities: ['ROLE_USER', 'ROLE_USER_ARTIST'],
-      pageTitle: 'mFinder2App.musicGenres.home.title'
+      pageTitle: 'mFinder2App.MusicGenre.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: 'new',
-    component: MusicGenresUpdateComponent,
+    component: MusicGenreUpdateComponent,
     resolve: {
-      musicGenres: MusicGenresResolve
+      MusicGenre: MusicGenreResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mFinder2App.musicGenres.home.title'
+      pageTitle: 'mFinder2App.MusicGenre.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/edit',
-    component: MusicGenresUpdateComponent,
+    component: MusicGenreUpdateComponent,
     resolve: {
-      musicGenres: MusicGenresResolve
+      MusicGenre: MusicGenreResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mFinder2App.musicGenres.home.title'
+      pageTitle: 'mFinder2App.MusicGenre.home.title'
     },
     canActivate: [UserRouteAccessService]
   }
 ];
 
-export const musicGenresPopupRoute: Routes = [
+export const MusicGenrePopupRoute: Routes = [
   {
     path: ':id/delete',
-    component: MusicGenresDeletePopupComponent,
+    component: MusicGenreDeletePopupComponent,
     resolve: {
-      musicGenres: MusicGenresResolve
+      MusicGenre: MusicGenreResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mFinder2App.musicGenres.home.title'
+      pageTitle: 'mFinder2App.MusicGenre.home.title'
     },
     canActivate: [UserRouteAccessService],
     outlet: 'popup'

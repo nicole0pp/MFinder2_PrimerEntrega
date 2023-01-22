@@ -5,19 +5,19 @@ import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
-import { IAlbums } from 'app/shared/model/albums.model';
+import { IAlbum } from 'app/shared/model/Album.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { AlbumsService } from './albums.service';
+import { AlbumService } from './Album.service';
 
 @Component({
-  selector: 'jhi-albums',
-  templateUrl: './albums.component.html'
+  selector: 'jhi-Album',
+  templateUrl: './Album.component.html'
 })
-export class AlbumsComponent implements OnInit, OnDestroy {
+export class AlbumComponent implements OnInit, OnDestroy {
   currentAccount: any;
-  albums: IAlbums[];
+  Album: IAlbum[];
   error: any;
   success: any;
   eventSubscriber: Subscription;
@@ -31,7 +31,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   reverse: any;
 
   constructor(
-    protected albumsService: AlbumsService,
+    protected AlbumService: AlbumService,
     protected parseLinks: JhiParseLinks,
     protected jhiAlertService: JhiAlertService,
     protected accountService: AccountService,
@@ -50,16 +50,14 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   }
 
   loadAll() {
-    this.albumsService
-      .query({
-        page: this.page - 1,
-        size: this.itemsPerPage,
-        sort: this.sort()
-      })
-      .subscribe(
-        (res: HttpResponse<IAlbums[]>) => this.paginateAlbums(res.body, res.headers),
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
+    this.AlbumService.query({
+      page: this.page - 1,
+      size: this.itemsPerPage,
+      sort: this.sort()
+    }).subscribe(
+      (res: HttpResponse<IAlbum[]>) => this.paginateAlbum(res.body, res.headers),
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   loadPage(page: number) {
@@ -70,7 +68,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   }
 
   transition() {
-    this.router.navigate(['/albums'], {
+    this.router.navigate(['/Album'], {
       queryParams: {
         page: this.page,
         size: this.itemsPerPage,
@@ -83,7 +81,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   clear() {
     this.page = 0;
     this.router.navigate([
-      '/albums',
+      '/Album',
       {
         page: this.page,
         sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -97,14 +95,14 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     this.accountService.identity().then(account => {
       this.currentAccount = account;
     });
-    this.registerChangeInAlbums();
+    this.registerChangeInAlbum();
   }
 
   ngOnDestroy() {
     this.eventManager.destroy(this.eventSubscriber);
   }
 
-  trackId(index: number, item: IAlbums) {
+  trackId(index: number, item: IAlbum) {
     return item.id;
   }
 
@@ -116,8 +114,8 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     return this.dataUtils.openFile(contentType, field);
   }
 
-  registerChangeInAlbums() {
-    this.eventSubscriber = this.eventManager.subscribe('albumsListModification', response => this.loadAll());
+  registerChangeInAlbum() {
+    this.eventSubscriber = this.eventManager.subscribe('AlbumListModification', response => this.loadAll());
   }
 
   sort() {
@@ -128,10 +126,10 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  protected paginateAlbums(data: IAlbums[], headers: HttpHeaders) {
+  protected paginateAlbum(data: IAlbum[], headers: HttpHeaders) {
     this.links = this.parseLinks.parse(headers.get('link'));
     this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
-    this.albums = data;
+    this.Album = data;
   }
 
   protected onError(errorMessage: string) {

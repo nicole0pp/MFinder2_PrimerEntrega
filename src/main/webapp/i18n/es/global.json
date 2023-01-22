@@ -8,10 +8,10 @@
       "entities": {
         "main": "Entidades",
         "songs": "Songs",
-        "albums": "Albums",
+        "Album": "Album",
         "FavoriteList": "Reproduction Lists",
         "listDetails": "List Details",
-        "musicGenres": "Music Genres",
+        "MusicGenre": "Music Genres",
         "artist": "Artist",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },

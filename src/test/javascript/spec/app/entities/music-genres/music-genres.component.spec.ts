@@ -5,20 +5,20 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data } from '@angular/router';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { MusicGenresComponent } from 'app/entities/music-genres/music-genres.component';
-import { MusicGenresService } from 'app/entities/music-genres/music-genres.service';
-import { MusicGenres } from 'app/shared/model/music-genres.model';
+import { MusicGenreComponent } from 'app/entities/music-genres/music-genres.component';
+import { MusicGenreService } from 'app/entities/music-genres/music-genres.service';
+import { MusicGenre } from 'app/shared/model/music-genres.model';
 
 describe('Component Tests', () => {
-  describe('MusicGenres Management Component', () => {
-    let comp: MusicGenresComponent;
-    let fixture: ComponentFixture<MusicGenresComponent>;
-    let service: MusicGenresService;
+  describe('MusicGenre Management Component', () => {
+    let comp: MusicGenreComponent;
+    let fixture: ComponentFixture<MusicGenreComponent>;
+    let service: MusicGenreService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [MusicGenresComponent],
+        declarations: [MusicGenreComponent],
         providers: [
           {
             provide: ActivatedRoute,
@@ -37,12 +37,12 @@ describe('Component Tests', () => {
           }
         ]
       })
-        .overrideTemplate(MusicGenresComponent, '')
+        .overrideTemplate(MusicGenreComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(MusicGenresComponent);
+      fixture = TestBed.createComponent(MusicGenreComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(MusicGenresService);
+      service = fixture.debugElement.injector.get(MusicGenreService);
     });
 
     it('Should call load all on init', () => {
@@ -51,7 +51,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new MusicGenres(123)],
+            body: [new MusicGenre(123)],
             headers
           })
         )
@@ -62,7 +62,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.musicGenres[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.MusicGenre[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should load a page', () => {
@@ -71,7 +71,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new MusicGenres(123)],
+            body: [new MusicGenre(123)],
             headers
           })
         )
@@ -82,7 +82,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.musicGenres[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.MusicGenre[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should not load a page is the page is the same as the previous page', () => {
@@ -101,7 +101,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new MusicGenres(123)],
+            body: [new MusicGenre(123)],
             headers
           })
         )
@@ -114,7 +114,7 @@ describe('Component Tests', () => {
       // THEN
       expect(comp.page).toEqual(0);
       expect(service.query).toHaveBeenCalledTimes(2);
-      expect(comp.musicGenres[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.MusicGenre[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
     it('should calculate the sort attribute for an id', () => {
       // WHEN

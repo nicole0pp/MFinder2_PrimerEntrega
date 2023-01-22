@@ -5,34 +5,34 @@ import { FormBuilder } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { MusicGenresUpdateComponent } from 'app/entities/music-genres/music-genres-update.component';
-import { MusicGenresService } from 'app/entities/music-genres/music-genres.service';
-import { MusicGenres } from 'app/shared/model/music-genres.model';
+import { MusicGenreUpdateComponent } from 'app/entities/music-genres/music-genres-update.component';
+import { MusicGenreService } from 'app/entities/music-genres/music-genres.service';
+import { MusicGenre } from 'app/shared/model/music-genres.model';
 
 describe('Component Tests', () => {
-  describe('MusicGenres Management Update Component', () => {
-    let comp: MusicGenresUpdateComponent;
-    let fixture: ComponentFixture<MusicGenresUpdateComponent>;
-    let service: MusicGenresService;
+  describe('MusicGenre Management Update Component', () => {
+    let comp: MusicGenreUpdateComponent;
+    let fixture: ComponentFixture<MusicGenreUpdateComponent>;
+    let service: MusicGenreService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [MusicGenresUpdateComponent],
+        declarations: [MusicGenreUpdateComponent],
         providers: [FormBuilder]
       })
-        .overrideTemplate(MusicGenresUpdateComponent, '')
+        .overrideTemplate(MusicGenreUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(MusicGenresUpdateComponent);
+      fixture = TestBed.createComponent(MusicGenreUpdateComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(MusicGenresService);
+      service = fixture.debugElement.injector.get(MusicGenreService);
     });
 
     describe('save', () => {
       it('Should call update service on save for existing entity', fakeAsync(() => {
         // GIVEN
-        const entity = new MusicGenres(123);
+        const entity = new MusicGenre(123);
         spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN
@@ -46,7 +46,7 @@ describe('Component Tests', () => {
 
       it('Should call create service on save for new entity', fakeAsync(() => {
         // GIVEN
-        const entity = new MusicGenres();
+        const entity = new MusicGenre();
         spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN

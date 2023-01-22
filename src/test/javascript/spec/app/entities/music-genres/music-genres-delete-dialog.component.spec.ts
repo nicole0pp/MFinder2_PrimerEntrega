@@ -5,27 +5,27 @@ import { Observable, of } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { MusicGenresDeleteDialogComponent } from 'app/entities/music-genres/music-genres-delete-dialog.component';
-import { MusicGenresService } from 'app/entities/music-genres/music-genres.service';
+import { MusicGenreDeleteDialogComponent } from 'app/entities/music-genres/music-genres-delete-dialog.component';
+import { MusicGenreService } from 'app/entities/music-genres/music-genres.service';
 
 describe('Component Tests', () => {
-  describe('MusicGenres Management Delete Component', () => {
-    let comp: MusicGenresDeleteDialogComponent;
-    let fixture: ComponentFixture<MusicGenresDeleteDialogComponent>;
-    let service: MusicGenresService;
+  describe('MusicGenre Management Delete Component', () => {
+    let comp: MusicGenreDeleteDialogComponent;
+    let fixture: ComponentFixture<MusicGenreDeleteDialogComponent>;
+    let service: MusicGenreService;
     let mockEventManager: any;
     let mockActiveModal: any;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [MusicGenresDeleteDialogComponent]
+        declarations: [MusicGenreDeleteDialogComponent]
       })
-        .overrideTemplate(MusicGenresDeleteDialogComponent, '')
+        .overrideTemplate(MusicGenreDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(MusicGenresDeleteDialogComponent);
+      fixture = TestBed.createComponent(MusicGenreDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(MusicGenresService);
+      service = fixture.debugElement.injector.get(MusicGenreService);
       mockEventManager = fixture.debugElement.injector.get(JhiEventManager);
       mockActiveModal = fixture.debugElement.injector.get(NgbActiveModal);
     });

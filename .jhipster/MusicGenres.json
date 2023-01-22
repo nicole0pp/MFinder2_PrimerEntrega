@@ -1,5 +1,5 @@
 {
-    "name": "MusicGenres",
+    "name": "MusicGenre",
     "fields": [
         {
             "fieldName": "name",

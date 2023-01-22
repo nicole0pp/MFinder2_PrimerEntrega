@@ -50,7 +50,7 @@
             <column name="music_genre_id" type="bigint">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_songs_music_genre_id" />
             </column>
-            <column name="album_id" type="bigint">
+            <column name="Album_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

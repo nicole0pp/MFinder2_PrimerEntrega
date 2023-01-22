@@ -8,7 +8,7 @@ export interface ISongs {
   audio?: any;
   artists?: string;
   musicGenreId?: number;
-  albumId?: number;
+  AlbumId?: number;
   listDetailsId?: number;
 }
 
@@ -23,7 +23,7 @@ export class Songs implements ISongs {
     public audio?: any,
     public artists?: string,
     public musicGenreId?: number,
-    public albumId?: number,
+    public AlbumId?: number,
     public listDetailsId?: number
   ) {}
 }

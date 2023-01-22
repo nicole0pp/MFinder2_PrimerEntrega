@@ -1,24 +1,24 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <div *ngIf="albums">
-            <h2><span jhiTranslate="mFinder2App.albums.detail.title">Albums</span> {{albums.id}}</h2>
+        <div *ngIf="Album">
+            <h2><span jhiTranslate="mFinder2App.Album.detail.title">Album</span> {{Album.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="mFinder2App.albums.name">Name</span></dt>
+                <dt><span jhiTranslate="mFinder2App.Album.name">Name</span></dt>
                 <dd>
-                    <span>{{albums.name}}</span>
+                    <span>{{Album.name}}</span>
                 </dd>
-                <dt><span jhiTranslate="mFinder2App.albums.picture">Picture</span></dt>
+                <dt><span jhiTranslate="mFinder2App.Album.picture">Picture</span></dt>
                 <dd>
-                    <div *ngIf="albums.picture">
-                        <a (click)="openFile(albums.pictureContentType, albums.picture)" jhiTranslate="entity.action.open">open</a>
-                        {{albums.pictureContentType}}, {{byteSize(albums.picture)}}
+                    <div *ngIf="Album.picture">
+                        <a (click)="openFile(Album.pictureContentType, Album.picture)" jhiTranslate="entity.action.open">open</a>
+                        {{Album.pictureContentType}}, {{byteSize(Album.picture)}}
                     </div>
                 </dd>
-                <dt><span jhiTranslate="mFinder2App.albums.publicationDate">Publication Date</span></dt>
+                <dt><span jhiTranslate="mFinder2App.Album.publicationDate">Publication Date</span></dt>
                 <dd>
-                    <span>{{albums.publicationDate}}</span>
+                    <span>{{Album.publicationDate}}</span>
                 </dd>
             </dl>
 
@@ -29,7 +29,7 @@
             </button>
 
             <button type="button"
-                    [routerLink]="['/albums', albums.id, 'edit']"
+                    [routerLink]="['/Album', Album.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>

@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IMusicGenres } from 'app/shared/model/music-genres.model';
+import { IMusicGenre } from 'app/shared/model/music-genres.model';
 
 @Component({
   selector: 'jhi-music-genres-detail',
   templateUrl: './music-genres-detail.component.html'
 })
-export class MusicGenresDetailComponent implements OnInit {
-  musicGenres: IMusicGenres;
+export class MusicGenreDetailComponent implements OnInit {
+  MusicGenre: IMusicGenre;
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ musicGenres }) => {
-      this.musicGenres = musicGenres;
+    this.activatedRoute.data.subscribe(({ MusicGenre }) => {
+      this.MusicGenre = MusicGenre;
     });
   }
 

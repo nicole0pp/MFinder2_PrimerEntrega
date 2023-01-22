@@ -1,46 +1,46 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="mFinder2App.musicGenres.home.title">Music Genres</span>
+        <span jhiTranslate="mFinder2App.MusicGenre.home.title">Music Genres</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-music-genres" [routerLink]="['/music-genres/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="mFinder2App.musicGenres.home.createLabel">
+            <span  jhiTranslate="mFinder2App.MusicGenre.home.createLabel">
             Create new Music Genres
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="musicGenres">
+    <div class="table-responsive" *ngIf="MusicGenre">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="name"><span jhiTranslate="mFinder2App.musicGenres.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="type"><span jhiTranslate="mFinder2App.musicGenres.type">Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="mFinder2App.MusicGenre.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="type"><span jhiTranslate="mFinder2App.MusicGenre.type">Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let musicGenres of musicGenres ;trackBy: trackId">
-                <td><a [routerLink]="['/music-genres', musicGenres.id, 'view' ]">{{musicGenres.id}}</a></td>
-                <td>{{musicGenres.name}}</td>
-                <td>{{musicGenres.type}}</td>
+            <tr *ngFor="let MusicGenre of MusicGenre ;trackBy: trackId">
+                <td><a [routerLink]="['/music-genres', MusicGenre.id, 'view' ]">{{MusicGenre.id}}</a></td>
+                <td>{{MusicGenre.name}}</td>
+                <td>{{MusicGenre.type}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/music-genres', musicGenres.id, 'view' ]"
+                                [routerLink]="['/music-genres', MusicGenre.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/music-genres', musicGenres.id, 'edit']"
+                                [routerLink]="['/music-genres', MusicGenre.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'music-genres', { outlets: { popup: musicGenres.id + '/delete'} }]"
+                                [routerLink]="['/', 'music-genres', { outlets: { popup: MusicGenre.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
@@ -53,7 +53,7 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="musicGenres && musicGenres.length">
+    <div *ngIf="MusicGenre && MusicGenre.length">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

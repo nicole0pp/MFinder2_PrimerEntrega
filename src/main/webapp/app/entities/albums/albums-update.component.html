@@ -1,16 +1,16 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-albums-heading" jhiTranslate="mFinder2App.albums.home.createOrEditLabel">Create or edit a Albums</h2>
+            <h2 id="jhi-Album-heading" jhiTranslate="mFinder2App.Album.home.createOrEditLabel">Create or edit a Album</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!albums.id">
+                <div class="form-group" [hidden]="!Album.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.albums.name" for="field_name">Name</label>
+                    <label class="form-control-label" jhiTranslate="mFinder2App.Album.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
                     <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.albums.picture" for="field_picture">Picture</label>
+                    <label class="form-control-label" jhiTranslate="mFinder2App.Album.picture" for="field_picture">Picture</label>
                     <div>
                         <div *ngIf="editForm.get('picture').value" class="form-text text-danger clearfix">
                             <a class="pull-left" (click)="openFile(editForm.get('pictureContentType').value, editForm.get('picture').value)" jhiTranslate="entity.action.open">open</a><br>
@@ -39,7 +39,7 @@
                            formControlName="pictureContentType" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.albums.publicationDate" for="field_publicationDate">Publication Date</label>
+                    <label class="form-control-label" jhiTranslate="mFinder2App.Album.publicationDate" for="field_publicationDate">Publication Date</label>
                     <div class="input-group">
                         <input id="field_publicationDate" type="text" class="form-control" name="publicationDate" ngbDatepicker  #publicationDateDp="ngbDatepicker" formControlName="publicationDate"/>
                         <span class="input-group-append">

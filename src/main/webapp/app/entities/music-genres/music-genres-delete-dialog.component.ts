@@ -4,18 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { IMusicGenres } from 'app/shared/model/music-genres.model';
-import { MusicGenresService } from './music-genres.service';
+import { IMusicGenre } from 'app/shared/model/music-genres.model';
+import { MusicGenreService } from './music-genres.service';
 
 @Component({
   selector: 'jhi-music-genres-delete-dialog',
   templateUrl: './music-genres-delete-dialog.component.html'
 })
-export class MusicGenresDeleteDialogComponent {
-  musicGenres: IMusicGenres;
+export class MusicGenreDeleteDialogComponent {
+  MusicGenre: IMusicGenre;
 
   constructor(
-    protected musicGenresService: MusicGenresService,
+    protected MusicGenreService: MusicGenreService,
     public activeModal: NgbActiveModal,
     protected eventManager: JhiEventManager
   ) {}
@@ -25,10 +25,10 @@ export class MusicGenresDeleteDialogComponent {
   }
 
   confirmDelete(id: number) {
-    this.musicGenresService.delete(id).subscribe(response => {
+    this.MusicGenreService.delete(id).subscribe(response => {
       this.eventManager.broadcast({
-        name: 'musicGenresListModification',
-        content: 'Deleted an musicGenres'
+        name: 'MusicGenreListModification',
+        content: 'Deleted an MusicGenre'
       });
       this.activeModal.dismiss(true);
     });
@@ -39,16 +39,16 @@ export class MusicGenresDeleteDialogComponent {
   selector: 'jhi-music-genres-delete-popup',
   template: ''
 })
-export class MusicGenresDeletePopupComponent implements OnInit, OnDestroy {
+export class MusicGenreDeletePopupComponent implements OnInit, OnDestroy {
   protected ngbModalRef: NgbModalRef;
 
   constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ musicGenres }) => {
+    this.activatedRoute.data.subscribe(({ MusicGenre }) => {
       setTimeout(() => {
-        this.ngbModalRef = this.modalService.open(MusicGenresDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static' });
-        this.ngbModalRef.componentInstance.musicGenres = musicGenres;
+        this.ngbModalRef = this.modalService.open(MusicGenreDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static' });
+        this.ngbModalRef.componentInstance.MusicGenre = MusicGenre;
         this.ngbModalRef.result.then(
           result => {
             this.router.navigate(['/music-genres', { outlets: { popup: null } }]);

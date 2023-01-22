@@ -30,7 +30,7 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "otherEntityName": "musicGenres",
+            "otherEntityName": "MusicGenre",
             "otherEntityRelationshipName": "songs",
             "relationshipName": "musicGenre",
             "otherEntityField": "id",
@@ -38,9 +38,9 @@
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "albums",
+            "otherEntityName": "Album",
             "otherEntityRelationshipName": "songs",
-            "relationshipName": "album",
+            "relationshipName": "Album",
             "otherEntityField": "id"
         },
         {

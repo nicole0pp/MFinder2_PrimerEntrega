@@ -102,16 +102,16 @@ public class SongsDTO implements Serializable {
         return musicGenreId;
     }
 
-    public void setMusicGenreId(Long musicGenresId) {
-        this.musicGenreId = musicGenresId;
+    public void setMusicGenreId(Long MusicGenreId) {
+        this.musicGenreId = MusicGenreId;
     }
 
     public Long getAlbumId() {
         return albumId;
     }
 
-    public void setAlbumId(Long albumsId) {
-        this.albumId = albumsId;
+    public void setAlbumId(Long albumId) {
+        this.albumId = albumId;
     }
 
     public Long getListDetailsId() {
@@ -153,7 +153,7 @@ public class SongsDTO implements Serializable {
             ", audio='" + getAudio() + "'" +
             ", artists='" + getArtists() + "'" +
             ", musicGenre=" + getMusicGenreId() +
-            ", album=" + getAlbumId() +
+            ", Album=" + getAlbumId() +
             ", listDetails=" + getListDetailsId() +
             "}";
     }

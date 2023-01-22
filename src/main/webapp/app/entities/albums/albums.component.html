@@ -1,51 +1,51 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="mFinder2App.albums.home.title">Albums</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-albums" [routerLink]="['/albums/new']">
+        <span jhiTranslate="mFinder2App.Album.home.title">Album</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-Album" [routerLink]="['/Album/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="mFinder2App.albums.home.createLabel">
-            Create new Albums
+            <span  jhiTranslate="mFinder2App.Album.home.createLabel">
+            Create new Album
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="albums">
+    <div class="table-responsive" *ngIf="Album">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="name"><span jhiTranslate="mFinder2App.albums.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="picture"><span jhiTranslate="mFinder2App.albums.picture">Picture</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="publicationDate"><span jhiTranslate="mFinder2App.albums.publicationDate">Publication Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="mFinder2App.Album.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="picture"><span jhiTranslate="mFinder2App.Album.picture">Picture</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="publicationDate"><span jhiTranslate="mFinder2App.Album.publicationDate">Publication Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let albums of albums ;trackBy: trackId">
-                <td><a [routerLink]="['/albums', albums.id, 'view' ]">{{albums.id}}</a></td>
-                <td>{{albums.name}}</td>
+            <tr *ngFor="let Album of Album ;trackBy: trackId">
+                <td><a [routerLink]="['/Album', Album.id, 'view' ]">{{Album.id}}</a></td>
+                <td>{{Album.name}}</td>
                 <td>
-                    <a *ngIf="albums.picture" (click)="openFile(albums.pictureContentType, albums.picture)" jhiTranslate="entity.action.open">open</a>
-                    <span *ngIf="albums.picture">{{albums.pictureContentType}}, {{byteSize(albums.picture)}}</span>
+                    <a *ngIf="Album.picture" (click)="openFile(Album.pictureContentType, Album.picture)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="Album.picture">{{Album.pictureContentType}}, {{byteSize(Album.picture)}}</span>
                 </td>
-                <td>{{albums.publicationDate | date:'mediumDate'}}</td>
+                <td>{{Album.publicationDate | date:'mediumDate'}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/albums', albums.id, 'view' ]"
+                                [routerLink]="['/Album', Album.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/albums', albums.id, 'edit']"
+                                [routerLink]="['/Album', Album.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'albums', { outlets: { popup: albums.id + '/delete'} }]"
+                                [routerLink]="['/', 'Album', { outlets: { popup: Album.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
@@ -58,7 +58,7 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="albums && albums.length">
+    <div *ngIf="Album && Album.length">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

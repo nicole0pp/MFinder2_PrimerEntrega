@@ -9,8 +9,8 @@ import { RouterModule } from '@angular/router';
         loadChildren: './songs/songs.module#MFinder2SongsModule'
       },
       {
-        path: 'albums',
-        loadChildren: './albums/albums.module#MFinder2AlbumsModule'
+        path: 'Album',
+        loadChildren: './Album/Album.module#MFinder2AlbumModule'
       },
       {
         path: 'reproduction-lists',
@@ -22,7 +22,7 @@ import { RouterModule } from '@angular/router';
       },
       {
         path: 'music-genres',
-        loadChildren: './music-genres/music-genres.module#MFinder2MusicGenresModule'
+        loadChildren: './music-genres/music-genres.module#MFinder2MusicGenreModule'
       },
       {
         path: 'artist',

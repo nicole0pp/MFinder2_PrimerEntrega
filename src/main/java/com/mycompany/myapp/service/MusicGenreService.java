@@ -1,6 +1,6 @@
 package com.mycompany.myapp.service;
 
-import com.mycompany.myapp.service.dto.MusicGenresDTO;
+import com.mycompany.myapp.service.dto.MusicGenreDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,37 +8,37 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link com.mycompany.myapp.domain.MusicGenres}.
+ * Service Interface for managing {@link com.mycompany.myapp.domain.MusicGenre}.
  */
-public interface MusicGenresService {
+public interface MusicGenreService {
 
     /**
-     * Save a musicGenres.
+     * Save a MusicGenre.
      *
-     * @param musicGenresDTO the entity to save.
+     * @param MusicGenreDTO the entity to save.
      * @return the persisted entity.
      */
-    MusicGenresDTO save(MusicGenresDTO musicGenresDTO);
+    MusicGenreDTO save(MusicGenreDTO MusicGenreDTO);
 
     /**
-     * Get all the musicGenres.
+     * Get all the MusicGenre.
      *
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<MusicGenresDTO> findAll(Pageable pageable);
+    Page<MusicGenreDTO> findAll(Pageable pageable);
 
 
     /**
-     * Get the "id" musicGenres.
+     * Get the "id" MusicGenre.
      *
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<MusicGenresDTO> findOne(Long id);
+    Optional<MusicGenreDTO> findOne(Long id);
 
     /**
-     * Delete the "id" musicGenres.
+     * Delete the "id" MusicGenre.
      *
      * @param id the id of the entity.
      */

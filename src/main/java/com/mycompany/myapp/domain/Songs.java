@@ -52,11 +52,11 @@ public class Songs implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    private MusicGenres musicGenre;
+    private MusicGenre musicGenre;
 
     @ManyToOne
     @JsonIgnoreProperties("songs")
-    private Albums album;
+    private Album Album;
 
     @ManyToOne
     @JsonIgnoreProperties("songs")
@@ -162,30 +162,30 @@ public class Songs implements Serializable {
         this.artists = artists;
     }
 
-    public MusicGenres getMusicGenre() {
+    public MusicGenre getMusicGenre() {
         return musicGenre;
     }
 
-    public Songs musicGenre(MusicGenres musicGenres) {
-        this.musicGenre = musicGenres;
+    public Songs musicGenre(MusicGenre MusicGenre) {
+        this.musicGenre = MusicGenre;
         return this;
     }
 
-    public void setMusicGenre(MusicGenres musicGenres) {
-        this.musicGenre = musicGenres;
+    public void setMusicGenre(MusicGenre MusicGenre) {
+        this.musicGenre = MusicGenre;
     }
 
-    public Albums getAlbum() {
-        return album;
+    public Album getAlbum() {
+        return Album;
     }
 
-    public Songs album(Albums albums) {
-        this.album = albums;
+    public Songs Album(Album Album) {
+        this.Album = Album;
         return this;
     }
 
-    public void setAlbum(Albums albums) {
-        this.album = albums;
+    public void setAlbum(Album Album) {
+        this.Album = Album;
     }
 
     public ListDetails getListDetails() {

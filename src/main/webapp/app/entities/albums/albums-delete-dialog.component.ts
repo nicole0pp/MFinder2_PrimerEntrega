@@ -4,27 +4,27 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { IAlbums } from 'app/shared/model/albums.model';
-import { AlbumsService } from './albums.service';
+import { IAlbum } from 'app/shared/model/Album.model';
+import { AlbumService } from './Album.service';
 
 @Component({
-  selector: 'jhi-albums-delete-dialog',
-  templateUrl: './albums-delete-dialog.component.html'
+  selector: 'jhi-Album-delete-dialog',
+  templateUrl: './Album-delete-dialog.component.html'
 })
-export class AlbumsDeleteDialogComponent {
-  albums: IAlbums;
+export class AlbumDeleteDialogComponent {
+  Album: IAlbum;
 
-  constructor(protected albumsService: AlbumsService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
+  constructor(protected AlbumService: AlbumService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
   clear() {
     this.activeModal.dismiss('cancel');
   }
 
   confirmDelete(id: number) {
-    this.albumsService.delete(id).subscribe(response => {
+    this.AlbumService.delete(id).subscribe(response => {
       this.eventManager.broadcast({
-        name: 'albumsListModification',
-        content: 'Deleted an albums'
+        name: 'AlbumListModification',
+        content: 'Deleted an Album'
       });
       this.activeModal.dismiss(true);
     });
@@ -32,26 +32,26 @@ export class AlbumsDeleteDialogComponent {
 }
 
 @Component({
-  selector: 'jhi-albums-delete-popup',
+  selector: 'jhi-Album-delete-popup',
   template: ''
 })
-export class AlbumsDeletePopupComponent implements OnInit, OnDestroy {
+export class AlbumDeletePopupComponent implements OnInit, OnDestroy {
   protected ngbModalRef: NgbModalRef;
 
   constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ albums }) => {
+    this.activatedRoute.data.subscribe(({ Album }) => {
       setTimeout(() => {
-        this.ngbModalRef = this.modalService.open(AlbumsDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static' });
-        this.ngbModalRef.componentInstance.albums = albums;
+        this.ngbModalRef = this.modalService.open(AlbumDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static' });
+        this.ngbModalRef.componentInstance.Album = Album;
         this.ngbModalRef.result.then(
           result => {
-            this.router.navigate(['/albums', { outlets: { popup: null } }]);
+            this.router.navigate(['/Album', { outlets: { popup: null } }]);
             this.ngbModalRef = null;
           },
           reason => {
-            this.router.navigate(['/albums', { outlets: { popup: null } }]);
+            this.router.navigate(['/Album', { outlets: { popup: null } }]);
             this.ngbModalRef = null;
           }
         );

@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 
-export interface IAlbums {
+export interface IAlbum {
   id?: number;
   name?: string;
   pictureContentType?: string;
@@ -8,7 +8,7 @@ export interface IAlbums {
   publicationDate?: Moment;
 }
 
-export class Albums implements IAlbums {
+export class Album implements IAlbum {
   constructor(
     public id?: number,
     public name?: string,

@@ -5,92 +5,92 @@ import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Albums } from 'app/shared/model/albums.model';
-import { AlbumsService } from './albums.service';
-import { AlbumsComponent } from './albums.component';
-import { AlbumsDetailComponent } from './albums-detail.component';
-import { AlbumsUpdateComponent } from './albums-update.component';
-import { AlbumsDeletePopupComponent } from './albums-delete-dialog.component';
-import { IAlbums } from 'app/shared/model/albums.model';
+import { Album } from 'app/shared/model/Album.model';
+import { AlbumService } from './Album.service';
+import { AlbumComponent } from './Album.component';
+import { AlbumDetailComponent } from './Album-detail.component';
+import { AlbumUpdateComponent } from './Album-update.component';
+import { AlbumDeletePopupComponent } from './Album-delete-dialog.component';
+import { IAlbum } from 'app/shared/model/Album.model';
 
 @Injectable({ providedIn: 'root' })
-export class AlbumsResolve implements Resolve<IAlbums> {
-  constructor(private service: AlbumsService) {}
+export class AlbumResolve implements Resolve<IAlbum> {
+  constructor(private service: AlbumService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IAlbums> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IAlbum> {
     const id = route.params['id'] ? route.params['id'] : null;
     if (id) {
       return this.service.find(id).pipe(
-        filter((response: HttpResponse<Albums>) => response.ok),
-        map((albums: HttpResponse<Albums>) => albums.body)
+        filter((response: HttpResponse<Album>) => response.ok),
+        map((Album: HttpResponse<Album>) => Album.body)
       );
     }
-    return of(new Albums());
+    return of(new Album());
   }
 }
 
-export const albumsRoute: Routes = [
+export const AlbumRoute: Routes = [
   {
     path: '',
-    component: AlbumsComponent,
+    component: AlbumComponent,
     resolve: {
       pagingParams: JhiResolvePagingParams
     },
     data: {
       authorities: ['ROLE_USER', 'ROLE_USER_ARTIST'],
       defaultSort: 'id,asc',
-      pageTitle: 'mFinder2App.albums.home.title'
+      pageTitle: 'mFinder2App.Album.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/view',
-    component: AlbumsDetailComponent,
+    component: AlbumDetailComponent,
     resolve: {
-      albums: AlbumsResolve
+      Album: AlbumResolve
     },
     data: {
       authorities: ['ROLE_USER', 'ROLE_USER_ARTIST'],
-      pageTitle: 'mFinder2App.albums.home.title'
+      pageTitle: 'mFinder2App.Album.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: 'new',
-    component: AlbumsUpdateComponent,
+    component: AlbumUpdateComponent,
     resolve: {
-      albums: AlbumsResolve
+      Album: AlbumResolve
     },
     data: {
       authorities: [],
-      pageTitle: 'mFinder2App.albums.home.title'
+      pageTitle: 'mFinder2App.Album.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/edit',
-    component: AlbumsUpdateComponent,
+    component: AlbumUpdateComponent,
     resolve: {
-      albums: AlbumsResolve
+      Album: AlbumResolve
     },
     data: {
       authorities: [],
-      pageTitle: 'mFinder2App.albums.home.title'
+      pageTitle: 'mFinder2App.Album.home.title'
     },
     canActivate: [UserRouteAccessService]
   }
 ];
 
-export const albumsPopupRoute: Routes = [
+export const AlbumPopupRoute: Routes = [
   {
     path: ':id/delete',
-    component: AlbumsDeletePopupComponent,
+    component: AlbumDeletePopupComponent,
     resolve: {
-      albums: AlbumsResolve
+      Album: AlbumResolve
     },
     data: {
       authorities: [],
-      pageTitle: 'mFinder2App.albums.home.title'
+      pageTitle: 'mFinder2App.Album.home.title'
     },
     canActivate: [UserRouteAccessService],
     outlet: 'popup'

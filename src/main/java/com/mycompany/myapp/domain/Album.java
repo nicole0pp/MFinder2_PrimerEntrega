@@ -15,9 +15,9 @@ import java.util.Objects;
  * not an ignored comment
  */
 @Entity
-@Table(name = "albums")
+@Table(name = "Album")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Albums implements Serializable {
+public class Album implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,7 +52,7 @@ public class Albums implements Serializable {
         return name;
     }
 
-    public Albums name(String name) {
+    public Album name(String name) {
         this.name = name;
         return this;
     }
@@ -65,7 +65,7 @@ public class Albums implements Serializable {
         return picture;
     }
 
-    public Albums picture(byte[] picture) {
+    public Album picture(byte[] picture) {
         this.picture = picture;
         return this;
     }
@@ -78,7 +78,7 @@ public class Albums implements Serializable {
         return pictureContentType;
     }
 
-    public Albums pictureContentType(String pictureContentType) {
+    public Album pictureContentType(String pictureContentType) {
         this.pictureContentType = pictureContentType;
         return this;
     }
@@ -91,7 +91,7 @@ public class Albums implements Serializable {
         return publicationDate;
     }
 
-    public Albums publicationDate(LocalDate publicationDate) {
+    public Album publicationDate(LocalDate publicationDate) {
         this.publicationDate = publicationDate;
         return this;
     }
@@ -106,10 +106,10 @@ public class Albums implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Albums)) {
+        if (!(o instanceof Album)) {
             return false;
         }
-        return id != null && id.equals(((Albums) o).id);
+        return id != null && id.equals(((Album) o).id);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class Albums implements Serializable {
 
     @Override
     public String toString() {
-        return "Albums{" +
+        return "Album{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", picture='" + getPicture() + "'" +

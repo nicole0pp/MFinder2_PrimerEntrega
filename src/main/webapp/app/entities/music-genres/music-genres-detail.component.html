@@ -1,17 +1,17 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <div *ngIf="musicGenres">
-            <h2><span jhiTranslate="mFinder2App.musicGenres.detail.title">Music Genres</span> {{musicGenres.id}}</h2>
+        <div *ngIf="MusicGenre">
+            <h2><span jhiTranslate="mFinder2App.MusicGenre.detail.title">Music Genres</span> {{MusicGenre.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="mFinder2App.musicGenres.name">Name</span></dt>
+                <dt><span jhiTranslate="mFinder2App.MusicGenre.name">Name</span></dt>
                 <dd>
-                    <span>{{musicGenres.name}}</span>
+                    <span>{{MusicGenre.name}}</span>
                 </dd>
-                <dt><span jhiTranslate="mFinder2App.musicGenres.type">Type</span></dt>
+                <dt><span jhiTranslate="mFinder2App.MusicGenre.type">Type</span></dt>
                 <dd>
-                    <span>{{musicGenres.type}}</span>
+                    <span>{{MusicGenre.type}}</span>
                 </dd>
             </dl>
 
@@ -22,7 +22,7 @@
             </button>
 
             <button type="button"
-                    [routerLink]="['/music-genres', musicGenres.id, 'edit']"
+                    [routerLink]="['/music-genres', MusicGenre.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>

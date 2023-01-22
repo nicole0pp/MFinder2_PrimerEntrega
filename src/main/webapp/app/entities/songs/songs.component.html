@@ -42,10 +42,10 @@
                             <a [routerLink]="['../music-genres', songs.musicGenreId , 'view' ]" >{{songs.musicGenreId}}</a>
                         </div>
                         <br>
-                        <!-- ALBUM -->
-                        <span id="title-field" jhiTranslate="mFinder2App.songs.album">Album</span>
-                        <div *ngIf="songs.albumId" id="component-id">
-                            <a [routerLink]="['../albums', songs.albumId , 'view' ]" >{{songs.albumId}}</a>
+                        <!-- Album -->
+                        <span id="title-field" jhiTranslate="mFinder2App.songs.Album">Album</span>
+                        <div *ngIf="songs.AlbumId" id="component-id">
+                            <a [routerLink]="['../Album', songs.AlbumId , 'view' ]" >{{songs.AlbumId}}</a>
                         </div>
                         <br>
                         <!-- DETAILS -->

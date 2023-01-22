@@ -15,7 +15,7 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql, mariadb"/>
 
     <!--
-        Added the entity MusicGenres.
+        Added the entity MusicGenre.
     -->
     <changeSet id="20230113162107-1" author="jhipster">
         <createTable tableName="music_genres">

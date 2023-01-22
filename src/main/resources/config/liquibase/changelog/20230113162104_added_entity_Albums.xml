@@ -15,10 +15,10 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql, mariadb"/>
 
     <!--
-        Added the entity Albums.
+        Added the entity Album.
     -->
     <changeSet id="20230113162104-1" author="jhipster">
-        <createTable tableName="albums" remarks="not an ignored comment">
+        <createTable tableName="Album" remarks="not an ignored comment">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -52,9 +52,9 @@
     -->
     <changeSet id="20230113162104-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/data/albums.csv"
+                  file="config/liquibase/data/Album.csv"
                   separator=";"
-                  tableName="albums"
+                  tableName="Album"
                   context="dev">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>

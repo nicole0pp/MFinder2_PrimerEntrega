@@ -7,10 +7,10 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { ISongs, Songs } from 'app/shared/model/songs.model';
 import { SongsService } from './songs.service';
-import { IMusicGenres } from 'app/shared/model/music-genres.model';
-import { MusicGenresService } from 'app/entities/music-genres';
-import { IAlbums } from 'app/shared/model/albums.model';
-import { AlbumsService } from 'app/entities/albums';
+import { IMusicGenre } from 'app/shared/model/music-genres.model';
+import { MusicGenreService } from 'app/entities/music-genres';
+import { IAlbum } from 'app/shared/model/Album.model';
+import { AlbumService } from 'app/entities/Album';
 import { IListDetails } from 'app/shared/model/list-details.model';
 import { ListDetailsService } from 'app/entities/list-details';
 
@@ -22,9 +22,9 @@ export class SongsUpdateComponent implements OnInit {
   songs: ISongs;
   isSaving: boolean;
 
-  musicgenres: IMusicGenres[];
+  MusicGenre: IMusicGenre[];
 
-  albums: IAlbums[];
+  Album: IAlbum[];
 
   listdetails: IListDetails[];
 
@@ -38,7 +38,7 @@ export class SongsUpdateComponent implements OnInit {
     audioContentType: [],
     artists: [],
     musicGenreId: [],
-    albumId: [],
+    AlbumId: [],
     listDetailsId: []
   });
 
@@ -46,8 +46,8 @@ export class SongsUpdateComponent implements OnInit {
     protected dataUtils: JhiDataUtils,
     protected jhiAlertService: JhiAlertService,
     protected songsService: SongsService,
-    protected musicGenresService: MusicGenresService,
-    protected albumsService: AlbumsService,
+    protected MusicGenreService: MusicGenreService,
+    protected AlbumService: AlbumService,
     protected listDetailsService: ListDetailsService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -59,38 +59,35 @@ export class SongsUpdateComponent implements OnInit {
       this.updateForm(songs);
       this.songs = songs;
     });
-    this.musicGenresService
-      .query({ filter: 'songs-is-null' })
+    this.MusicGenreService.query({ filter: 'songs-is-null' })
       .pipe(
-        filter((mayBeOk: HttpResponse<IMusicGenres[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IMusicGenres[]>) => response.body)
+        filter((mayBeOk: HttpResponse<IMusicGenre[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IMusicGenre[]>) => response.body)
       )
       .subscribe(
-        (res: IMusicGenres[]) => {
+        (res: IMusicGenre[]) => {
           if (!this.songs.musicGenreId) {
-            this.musicgenres = res;
+            this.MusicGenre = res;
           } else {
-            this.musicGenresService
-              .find(this.songs.musicGenreId)
+            this.MusicGenreService.find(this.songs.musicGenreId)
               .pipe(
-                filter((subResMayBeOk: HttpResponse<IMusicGenres>) => subResMayBeOk.ok),
-                map((subResponse: HttpResponse<IMusicGenres>) => subResponse.body)
+                filter((subResMayBeOk: HttpResponse<IMusicGenre>) => subResMayBeOk.ok),
+                map((subResponse: HttpResponse<IMusicGenre>) => subResponse.body)
               )
               .subscribe(
-                (subRes: IMusicGenres) => (this.musicgenres = [subRes].concat(res)),
+                (subRes: IMusicGenre) => (this.MusicGenre = [subRes].concat(res)),
                 (subRes: HttpErrorResponse) => this.onError(subRes.message)
               );
           }
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
-    this.albumsService
-      .query()
+    this.AlbumService.query()
       .pipe(
-        filter((mayBeOk: HttpResponse<IAlbums[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IAlbums[]>) => response.body)
+        filter((mayBeOk: HttpResponse<IAlbum[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IAlbum[]>) => response.body)
       )
-      .subscribe((res: IAlbums[]) => (this.albums = res), (res: HttpErrorResponse) => this.onError(res.message));
+      .subscribe((res: IAlbum[]) => (this.Album = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.listDetailsService
       .query()
       .pipe(
@@ -111,7 +108,7 @@ export class SongsUpdateComponent implements OnInit {
       audioContentType: songs.audioContentType,
       artists: songs.artists,
       musicGenreId: songs.musicGenreId,
-      albumId: songs.albumId,
+      AlbumId: songs.AlbumId,
       listDetailsId: songs.listDetailsId
     });
   }
@@ -174,7 +171,7 @@ export class SongsUpdateComponent implements OnInit {
       audio: this.editForm.get(['audio']).value,
       artists: this.editForm.get(['artists']).value,
       musicGenreId: this.editForm.get(['musicGenreId']).value,
-      albumId: this.editForm.get(['albumId']).value,
+      AlbumId: this.editForm.get(['AlbumId']).value,
       listDetailsId: this.editForm.get(['listDetailsId']).value
     };
     return entity;
@@ -196,11 +193,11 @@ export class SongsUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackMusicGenresById(index: number, item: IMusicGenres) {
+  trackMusicGenreById(index: number, item: IMusicGenre) {
     return item.id;
   }
 
-  trackAlbumsById(index: number, item: IAlbums) {
+  trackAlbumById(index: number, item: IAlbum) {
     return item.id;
   }
 

@@ -37,10 +37,10 @@
                         <a [routerLink]="['/music-genres', songs.musicGenreId, 'view']">{{songs.musicGenreId}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="mFinder2App.songs.album">Album</span></dt>
+                <dt><span jhiTranslate="mFinder2App.songs.Album">Album</span></dt>
                 <dd>
-                    <div *ngIf="songs.albumId">
-                        <a [routerLink]="['/albums', songs.albumId, 'view']">{{songs.albumId}}</a>
+                    <div *ngIf="songs.AlbumId">
+                        <a [routerLink]="['/Album', songs.AlbumId, 'view']">{{songs.AlbumId}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="mFinder2App.songs.listDetails">List Details</span></dt>

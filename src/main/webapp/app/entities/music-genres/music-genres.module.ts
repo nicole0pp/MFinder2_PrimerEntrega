@@ -5,31 +5,31 @@ import { JhiLanguageHelper } from 'app/core';
 
 import { MFinder2SharedModule } from 'app/shared';
 import {
-  MusicGenresComponent,
-  MusicGenresDetailComponent,
-  MusicGenresUpdateComponent,
-  MusicGenresDeletePopupComponent,
-  MusicGenresDeleteDialogComponent,
-  musicGenresRoute,
-  musicGenresPopupRoute
+  MusicGenreComponent,
+  MusicGenreDetailComponent,
+  MusicGenreUpdateComponent,
+  MusicGenreDeletePopupComponent,
+  MusicGenreDeleteDialogComponent,
+  MusicGenreRoute,
+  MusicGenrePopupRoute
 } from './';
 
-const ENTITY_STATES = [...musicGenresRoute, ...musicGenresPopupRoute];
+const ENTITY_STATES = [...MusicGenreRoute, ...MusicGenrePopupRoute];
 
 @NgModule({
   imports: [MFinder2SharedModule, RouterModule.forChild(ENTITY_STATES)],
   declarations: [
-    MusicGenresComponent,
-    MusicGenresDetailComponent,
-    MusicGenresUpdateComponent,
-    MusicGenresDeleteDialogComponent,
-    MusicGenresDeletePopupComponent
+    MusicGenreComponent,
+    MusicGenreDetailComponent,
+    MusicGenreUpdateComponent,
+    MusicGenreDeleteDialogComponent,
+    MusicGenreDeletePopupComponent
   ],
-  entryComponents: [MusicGenresComponent, MusicGenresUpdateComponent, MusicGenresDeleteDialogComponent, MusicGenresDeletePopupComponent],
+  entryComponents: [MusicGenreComponent, MusicGenreUpdateComponent, MusicGenreDeleteDialogComponent, MusicGenreDeletePopupComponent],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MFinder2MusicGenresModule {
+export class MFinder2MusicGenreModule {
   constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
     this.languageHelper.language.subscribe((languageKey: string) => {
       if (languageKey !== undefined) {

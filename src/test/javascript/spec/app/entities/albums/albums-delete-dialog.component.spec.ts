@@ -5,27 +5,27 @@ import { Observable, of } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { AlbumsDeleteDialogComponent } from 'app/entities/albums/albums-delete-dialog.component';
-import { AlbumsService } from 'app/entities/albums/albums.service';
+import { AlbumDeleteDialogComponent } from 'app/entities/Album/Album-delete-dialog.component';
+import { AlbumService } from 'app/entities/Album/Album.service';
 
 describe('Component Tests', () => {
-  describe('Albums Management Delete Component', () => {
-    let comp: AlbumsDeleteDialogComponent;
-    let fixture: ComponentFixture<AlbumsDeleteDialogComponent>;
-    let service: AlbumsService;
+  describe('Album Management Delete Component', () => {
+    let comp: AlbumDeleteDialogComponent;
+    let fixture: ComponentFixture<AlbumDeleteDialogComponent>;
+    let service: AlbumService;
     let mockEventManager: any;
     let mockActiveModal: any;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [AlbumsDeleteDialogComponent]
+        declarations: [AlbumDeleteDialogComponent]
       })
-        .overrideTemplate(AlbumsDeleteDialogComponent, '')
+        .overrideTemplate(AlbumDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(AlbumsDeleteDialogComponent);
+      fixture = TestBed.createComponent(AlbumDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(AlbumsService);
+      service = fixture.debugElement.injector.get(AlbumService);
       mockEventManager = fixture.debugElement.injector.get(JhiEventManager);
       mockActiveModal = fixture.debugElement.injector.get(NgbActiveModal);
     });

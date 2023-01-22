@@ -1,19 +1,19 @@
 {
   "mFinder2App": {
-    "albums": {
+    "Album": {
       "home": {
-        "title": "Albums",
-        "createLabel": "Create a new Albums",
-        "createOrEditLabel": "Create or edit a Albums"
+        "title": "Album",
+        "createLabel": "Create a new Album",
+        "createOrEditLabel": "Create or edit a Album"
       },
-      "created": "A new Albums is created with identifier {{ param }}",
-      "updated": "A Albums is updated with identifier {{ param }}",
-      "deleted": "A Albums is deleted with identifier {{ param }}",
+      "created": "A new Album is created with identifier {{ param }}",
+      "updated": "A Album is updated with identifier {{ param }}",
+      "deleted": "A Album is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Albums {{ id }}?"
+        "question": "Are you sure you want to delete Album {{ id }}?"
       },
       "detail": {
-        "title": "Albums"
+        "title": "Album"
       },
       "name": "Name",
       "picture": "Picture",

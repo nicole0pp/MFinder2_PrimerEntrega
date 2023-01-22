@@ -71,14 +71,14 @@
                     <label class="form-control-label" jhiTranslate="mFinder2App.songs.musicGenre" for="field_musicGenre">Music Genre</label>
                     <select class="form-control" id="field_musicGenre" name="musicGenre" formControlName="musicGenreId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="musicGenresOption.id" *ngFor="let musicGenresOption of musicgenres; trackBy: trackMusicGenresById">{{musicGenresOption.id}}</option>
+                        <option [ngValue]="MusicGenreOption.id" *ngFor="let MusicGenreOption of MusicGenre; trackBy: trackMusicGenreById">{{MusicGenreOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.album" for="field_album">Album</label>
-                    <select class="form-control" id="field_album" name="album" formControlName="albumId">
+                    <label class="form-control-label" jhiTranslate="mFinder2App.songs.Album" for="field_Album">Album</label>
+                    <select class="form-control" id="field_Album" name="Album" formControlName="AlbumId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="albumsOption.id" *ngFor="let albumsOption of albums; trackBy: trackAlbumsById">{{albumsOption.id}}</option>
+                        <option [ngValue]="AlbumOption.id" *ngFor="let AlbumOption of Album; trackBy: trackAlbumById">{{AlbumOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">

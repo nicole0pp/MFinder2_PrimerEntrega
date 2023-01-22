@@ -2,20 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
-import { IAlbums } from 'app/shared/model/albums.model';
+import { IAlbum } from 'app/shared/model/Album.model';
 
 @Component({
-  selector: 'jhi-albums-detail',
-  templateUrl: './albums-detail.component.html'
+  selector: 'jhi-Album-detail',
+  templateUrl: './Album-detail.component.html'
 })
-export class AlbumsDetailComponent implements OnInit {
-  albums: IAlbums;
+export class AlbumDetailComponent implements OnInit {
+  Album: IAlbum;
 
   constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ albums }) => {
-      this.albums = albums;
+    this.activatedRoute.data.subscribe(({ Album }) => {
+      this.Album = Album;
     });
   }
 

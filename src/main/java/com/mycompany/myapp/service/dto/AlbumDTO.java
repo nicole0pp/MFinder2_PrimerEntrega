@@ -7,10 +7,10 @@ import java.util.Objects;
 import javax.persistence.Lob;
 
 /**
- * A DTO for the {@link com.mycompany.myapp.domain.Albums} entity.
+ * A DTO for the {@link com.mycompany.myapp.domain.Album} entity.
  */
 @ApiModel(description = "not an ignored comment")
-public class AlbumsDTO implements Serializable {
+public class AlbumDTO implements Serializable {
 
     private Long id;
 
@@ -73,11 +73,11 @@ public class AlbumsDTO implements Serializable {
             return false;
         }
 
-        AlbumsDTO albumsDTO = (AlbumsDTO) o;
-        if (albumsDTO.getId() == null || getId() == null) {
+        AlbumDTO AlbumDTO = (AlbumDTO) o;
+        if (AlbumDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), albumsDTO.getId());
+        return Objects.equals(getId(), AlbumDTO.getId());
     }
 
     @Override
@@ -87,7 +87,7 @@ public class AlbumsDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "AlbumsDTO{" +
+        return "AlbumDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", picture='" + getPicture() + "'" +

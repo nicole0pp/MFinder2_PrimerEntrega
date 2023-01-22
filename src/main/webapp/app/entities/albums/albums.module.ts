@@ -5,25 +5,25 @@ import { JhiLanguageHelper } from 'app/core';
 
 import { MFinder2SharedModule } from 'app/shared';
 import {
-  AlbumsComponent,
-  AlbumsDetailComponent,
-  AlbumsUpdateComponent,
-  AlbumsDeletePopupComponent,
-  AlbumsDeleteDialogComponent,
-  albumsRoute,
-  albumsPopupRoute
+  AlbumComponent,
+  AlbumDetailComponent,
+  AlbumUpdateComponent,
+  AlbumDeletePopupComponent,
+  AlbumDeleteDialogComponent,
+  AlbumRoute,
+  AlbumPopupRoute
 } from './';
 
-const ENTITY_STATES = [...albumsRoute, ...albumsPopupRoute];
+const ENTITY_STATES = [...AlbumRoute, ...AlbumPopupRoute];
 
 @NgModule({
   imports: [MFinder2SharedModule, RouterModule.forChild(ENTITY_STATES)],
-  declarations: [AlbumsComponent, AlbumsDetailComponent, AlbumsUpdateComponent, AlbumsDeleteDialogComponent, AlbumsDeletePopupComponent],
-  entryComponents: [AlbumsComponent, AlbumsUpdateComponent, AlbumsDeleteDialogComponent, AlbumsDeletePopupComponent],
+  declarations: [AlbumComponent, AlbumDetailComponent, AlbumUpdateComponent, AlbumDeleteDialogComponent, AlbumDeletePopupComponent],
+  entryComponents: [AlbumComponent, AlbumUpdateComponent, AlbumDeleteDialogComponent, AlbumDeletePopupComponent],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MFinder2AlbumsModule {
+export class MFinder2AlbumModule {
   constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
     this.languageHelper.language.subscribe((languageKey: string) => {
       if (languageKey !== undefined) {

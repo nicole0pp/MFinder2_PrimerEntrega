@@ -5,20 +5,20 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data } from '@angular/router';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { AlbumsComponent } from 'app/entities/albums/albums.component';
-import { AlbumsService } from 'app/entities/albums/albums.service';
-import { Albums } from 'app/shared/model/albums.model';
+import { AlbumComponent } from 'app/entities/Album/Album.component';
+import { AlbumService } from 'app/entities/Album/Album.service';
+import { Album } from 'app/shared/model/Album.model';
 
 describe('Component Tests', () => {
-  describe('Albums Management Component', () => {
-    let comp: AlbumsComponent;
-    let fixture: ComponentFixture<AlbumsComponent>;
-    let service: AlbumsService;
+  describe('Album Management Component', () => {
+    let comp: AlbumComponent;
+    let fixture: ComponentFixture<AlbumComponent>;
+    let service: AlbumService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [AlbumsComponent],
+        declarations: [AlbumComponent],
         providers: [
           {
             provide: ActivatedRoute,
@@ -37,12 +37,12 @@ describe('Component Tests', () => {
           }
         ]
       })
-        .overrideTemplate(AlbumsComponent, '')
+        .overrideTemplate(AlbumComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(AlbumsComponent);
+      fixture = TestBed.createComponent(AlbumComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(AlbumsService);
+      service = fixture.debugElement.injector.get(AlbumService);
     });
 
     it('Should call load all on init', () => {
@@ -51,7 +51,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new Albums(123)],
+            body: [new Album(123)],
             headers
           })
         )
@@ -62,7 +62,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.albums[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.Album[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should load a page', () => {
@@ -71,7 +71,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new Albums(123)],
+            body: [new Album(123)],
             headers
           })
         )
@@ -82,7 +82,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.albums[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.Album[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should not load a page is the page is the same as the previous page', () => {
@@ -101,7 +101,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new Albums(123)],
+            body: [new Album(123)],
             headers
           })
         )
@@ -114,7 +114,7 @@ describe('Component Tests', () => {
       // THEN
       expect(comp.page).toEqual(0);
       expect(service.query).toHaveBeenCalledTimes(2);
-      expect(comp.albums[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.Album[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
     it('should calculate the sort attribute for an id', () => {
       // WHEN

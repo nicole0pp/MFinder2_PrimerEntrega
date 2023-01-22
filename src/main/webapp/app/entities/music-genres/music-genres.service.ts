@@ -4,32 +4,32 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IMusicGenres } from 'app/shared/model/music-genres.model';
+import { IMusicGenre } from 'app/shared/model/music-genres.model';
 
-type EntityResponseType = HttpResponse<IMusicGenres>;
-type EntityArrayResponseType = HttpResponse<IMusicGenres[]>;
+type EntityResponseType = HttpResponse<IMusicGenre>;
+type EntityArrayResponseType = HttpResponse<IMusicGenre[]>;
 
 @Injectable({ providedIn: 'root' })
-export class MusicGenresService {
+export class MusicGenreService {
   public resourceUrl = SERVER_API_URL + 'api/music-genres';
 
   constructor(protected http: HttpClient) {}
 
-  create(musicGenres: IMusicGenres): Observable<EntityResponseType> {
-    return this.http.post<IMusicGenres>(this.resourceUrl, musicGenres, { observe: 'response' });
+  create(MusicGenre: IMusicGenre): Observable<EntityResponseType> {
+    return this.http.post<IMusicGenre>(this.resourceUrl, MusicGenre, { observe: 'response' });
   }
 
-  update(musicGenres: IMusicGenres): Observable<EntityResponseType> {
-    return this.http.put<IMusicGenres>(this.resourceUrl, musicGenres, { observe: 'response' });
+  update(MusicGenre: IMusicGenre): Observable<EntityResponseType> {
+    return this.http.put<IMusicGenre>(this.resourceUrl, MusicGenre, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IMusicGenres>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.get<IMusicGenre>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IMusicGenres[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<IMusicGenre[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<any>> {

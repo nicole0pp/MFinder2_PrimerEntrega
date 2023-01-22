@@ -7,41 +7,41 @@ import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IAlbums } from 'app/shared/model/albums.model';
+import { IAlbum } from 'app/shared/model/Album.model';
 
-type EntityResponseType = HttpResponse<IAlbums>;
-type EntityArrayResponseType = HttpResponse<IAlbums[]>;
+type EntityResponseType = HttpResponse<IAlbum>;
+type EntityArrayResponseType = HttpResponse<IAlbum[]>;
 
 @Injectable({ providedIn: 'root' })
-export class AlbumsService {
-  public resourceUrl = SERVER_API_URL + 'api/albums';
+export class AlbumService {
+  public resourceUrl = SERVER_API_URL + 'api/Album';
 
   constructor(protected http: HttpClient) {}
 
-  create(albums: IAlbums): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(albums);
+  create(Album: IAlbum): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(Album);
     return this.http
-      .post<IAlbums>(this.resourceUrl, copy, { observe: 'response' })
+      .post<IAlbum>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  update(albums: IAlbums): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(albums);
+  update(Album: IAlbum): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(Album);
     return this.http
-      .put<IAlbums>(this.resourceUrl, copy, { observe: 'response' })
+      .put<IAlbum>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<IAlbums>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .get<IAlbum>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<IAlbums[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<IAlbum[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
@@ -49,10 +49,9 @@ export class AlbumsService {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  protected convertDateFromClient(albums: IAlbums): IAlbums {
-    const copy: IAlbums = Object.assign({}, albums, {
-      publicationDate:
-        albums.publicationDate != null && albums.publicationDate.isValid() ? albums.publicationDate.format(DATE_FORMAT) : null
+  protected convertDateFromClient(Album: IAlbum): IAlbum {
+    const copy: IAlbum = Object.assign({}, Album, {
+      publicationDate: Album.publicationDate != null && Album.publicationDate.isValid() ? Album.publicationDate.format(DATE_FORMAT) : null
     });
     return copy;
   }
@@ -66,8 +65,8 @@ export class AlbumsService {
 
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
-      res.body.forEach((albums: IAlbums) => {
-        albums.publicationDate = albums.publicationDate != null ? moment(albums.publicationDate) : null;
+      res.body.forEach((Album: IAlbum) => {
+        Album.publicationDate = Album.publicationDate != null ? moment(Album.publicationDate) : null;
       });
     }
     return res;

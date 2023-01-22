@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.mycompany.myapp.domain.MusicGenres} entity.
+ * A DTO for the {@link com.mycompany.myapp.domain.MusicGenre} entity.
  */
-public class MusicGenresDTO implements Serializable {
+public class MusicGenreDTO implements Serializable {
 
     private Long id;
 
@@ -49,11 +49,11 @@ public class MusicGenresDTO implements Serializable {
             return false;
         }
 
-        MusicGenresDTO musicGenresDTO = (MusicGenresDTO) o;
-        if (musicGenresDTO.getId() == null || getId() == null) {
+        MusicGenreDTO MusicGenreDTO = (MusicGenreDTO) o;
+        if (MusicGenreDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), musicGenresDTO.getId());
+        return Objects.equals(getId(), MusicGenreDTO.getId());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class MusicGenresDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "MusicGenresDTO{" +
+        return "MusicGenreDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +

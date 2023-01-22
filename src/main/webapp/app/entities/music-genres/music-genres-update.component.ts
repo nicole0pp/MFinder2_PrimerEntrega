@@ -3,15 +3,15 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { IMusicGenres, MusicGenres } from 'app/shared/model/music-genres.model';
-import { MusicGenresService } from './music-genres.service';
+import { IMusicGenre, MusicGenre } from 'app/shared/model/music-genres.model';
+import { MusicGenreService } from './music-genres.service';
 
 @Component({
   selector: 'jhi-music-genres-update',
   templateUrl: './music-genres-update.component.html'
 })
-export class MusicGenresUpdateComponent implements OnInit {
-  musicGenres: IMusicGenres;
+export class MusicGenreUpdateComponent implements OnInit {
+  MusicGenre: IMusicGenre;
   isSaving: boolean;
 
   editForm = this.fb.group({
@@ -20,21 +20,21 @@ export class MusicGenresUpdateComponent implements OnInit {
     type: []
   });
 
-  constructor(protected musicGenresService: MusicGenresService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected MusicGenreService: MusicGenreService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.isSaving = false;
-    this.activatedRoute.data.subscribe(({ musicGenres }) => {
-      this.updateForm(musicGenres);
-      this.musicGenres = musicGenres;
+    this.activatedRoute.data.subscribe(({ MusicGenre }) => {
+      this.updateForm(MusicGenre);
+      this.MusicGenre = MusicGenre;
     });
   }
 
-  updateForm(musicGenres: IMusicGenres) {
+  updateForm(MusicGenre: IMusicGenre) {
     this.editForm.patchValue({
-      id: musicGenres.id,
-      name: musicGenres.name,
-      type: musicGenres.type
+      id: MusicGenre.id,
+      name: MusicGenre.name,
+      type: MusicGenre.type
     });
   }
 
@@ -44,17 +44,17 @@ export class MusicGenresUpdateComponent implements OnInit {
 
   save() {
     this.isSaving = true;
-    const musicGenres = this.createFromForm();
-    if (musicGenres.id !== undefined) {
-      this.subscribeToSaveResponse(this.musicGenresService.update(musicGenres));
+    const MusicGenre = this.createFromForm();
+    if (MusicGenre.id !== undefined) {
+      this.subscribeToSaveResponse(this.MusicGenreService.update(MusicGenre));
     } else {
-      this.subscribeToSaveResponse(this.musicGenresService.create(musicGenres));
+      this.subscribeToSaveResponse(this.MusicGenreService.create(MusicGenre));
     }
   }
 
-  private createFromForm(): IMusicGenres {
+  private createFromForm(): IMusicGenre {
     const entity = {
-      ...new MusicGenres(),
+      ...new MusicGenre(),
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
       type: this.editForm.get(['type']).value
@@ -62,8 +62,8 @@ export class MusicGenresUpdateComponent implements OnInit {
     return entity;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IMusicGenres>>) {
-    result.subscribe((res: HttpResponse<IMusicGenres>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IMusicGenre>>) {
+    result.subscribe((res: HttpResponse<IMusicGenre>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
   }
 
   protected onSaveSuccess() {

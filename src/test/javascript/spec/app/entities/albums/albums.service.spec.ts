@@ -6,15 +6,15 @@ import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
-import { AlbumsService } from 'app/entities/albums/albums.service';
-import { IAlbums, Albums } from 'app/shared/model/albums.model';
+import { AlbumService } from 'app/entities/Album/Album.service';
+import { IAlbum, Album } from 'app/shared/model/Album.model';
 
 describe('Service Tests', () => {
-  describe('Albums Service', () => {
+  describe('Album Service', () => {
     let injector: TestBed;
-    let service: AlbumsService;
+    let service: AlbumService;
     let httpMock: HttpTestingController;
-    let elemDefault: IAlbums;
+    let elemDefault: IAlbum;
     let expectedResult;
     let currentDate: moment.Moment;
     beforeEach(() => {
@@ -23,11 +23,11 @@ describe('Service Tests', () => {
       });
       expectedResult = {};
       injector = getTestBed();
-      service = injector.get(AlbumsService);
+      service = injector.get(AlbumService);
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Albums(0, 'AAAAAAA', 'image/png', 'AAAAAAA', currentDate);
+      elemDefault = new Album(0, 'AAAAAAA', 'image/png', 'AAAAAAA', currentDate);
     });
 
     describe('Service methods', () => {
@@ -48,7 +48,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: elemDefault });
       });
 
-      it('should create a Albums', async () => {
+      it('should create a Album', async () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
@@ -63,7 +63,7 @@ describe('Service Tests', () => {
           returnedFromService
         );
         service
-          .create(new Albums(null))
+          .create(new Album(null))
           .pipe(take(1))
           .subscribe(resp => (expectedResult = resp));
         const req = httpMock.expectOne({ method: 'POST' });
@@ -71,7 +71,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: expected });
       });
 
-      it('should update a Albums', async () => {
+      it('should update a Album', async () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
@@ -96,7 +96,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: expected });
       });
 
-      it('should return a list of Albums', async () => {
+      it('should return a list of Album', async () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
@@ -124,7 +124,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a Albums', async () => {
+      it('should delete a Album', async () => {
         const rxPromise = service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });

@@ -5,15 +5,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
-import { IAlbums, Albums } from 'app/shared/model/albums.model';
-import { AlbumsService } from './albums.service';
+import { IAlbum, Album } from 'app/shared/model/Album.model';
+import { AlbumService } from './Album.service';
 
 @Component({
-  selector: 'jhi-albums-update',
-  templateUrl: './albums-update.component.html'
+  selector: 'jhi-Album-update',
+  templateUrl: './Album-update.component.html'
 })
-export class AlbumsUpdateComponent implements OnInit {
-  albums: IAlbums;
+export class AlbumUpdateComponent implements OnInit {
+  Album: IAlbum;
   isSaving: boolean;
   publicationDateDp: any;
 
@@ -28,26 +28,26 @@ export class AlbumsUpdateComponent implements OnInit {
   constructor(
     protected dataUtils: JhiDataUtils,
     protected jhiAlertService: JhiAlertService,
-    protected albumsService: AlbumsService,
+    protected AlbumService: AlbumService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
     this.isSaving = false;
-    this.activatedRoute.data.subscribe(({ albums }) => {
-      this.updateForm(albums);
-      this.albums = albums;
+    this.activatedRoute.data.subscribe(({ Album }) => {
+      this.updateForm(Album);
+      this.Album = Album;
     });
   }
 
-  updateForm(albums: IAlbums) {
+  updateForm(Album: IAlbum) {
     this.editForm.patchValue({
-      id: albums.id,
-      name: albums.name,
-      picture: albums.picture,
-      pictureContentType: albums.pictureContentType,
-      publicationDate: albums.publicationDate
+      id: Album.id,
+      name: Album.name,
+      picture: Album.picture,
+      pictureContentType: Album.pictureContentType,
+      publicationDate: Album.publicationDate
     });
   }
 
@@ -89,17 +89,17 @@ export class AlbumsUpdateComponent implements OnInit {
 
   save() {
     this.isSaving = true;
-    const albums = this.createFromForm();
-    if (albums.id !== undefined) {
-      this.subscribeToSaveResponse(this.albumsService.update(albums));
+    const Album = this.createFromForm();
+    if (Album.id !== undefined) {
+      this.subscribeToSaveResponse(this.AlbumService.update(Album));
     } else {
-      this.subscribeToSaveResponse(this.albumsService.create(albums));
+      this.subscribeToSaveResponse(this.AlbumService.create(Album));
     }
   }
 
-  private createFromForm(): IAlbums {
+  private createFromForm(): IAlbum {
     const entity = {
-      ...new Albums(),
+      ...new Album(),
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
       pictureContentType: this.editForm.get(['pictureContentType']).value,
@@ -109,8 +109,8 @@ export class AlbumsUpdateComponent implements OnInit {
     return entity;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IAlbums>>) {
-    result.subscribe((res: HttpResponse<IAlbums>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IAlbum>>) {
+    result.subscribe((res: HttpResponse<IAlbum>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
   }
 
   protected onSaveSuccess() {

@@ -1,6 +1,6 @@
 {
   "mFinder2App": {
-    "musicGenres": {
+    "MusicGenre": {
       "home": {
         "title": "Music Genres",
         "createLabel": "Crear nuevo Music Genres",

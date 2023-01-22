@@ -14,11 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="music_genres"/>
 
-        <addForeignKeyConstraint baseColumnNames="album_id"
+        <addForeignKeyConstraint baseColumnNames="Album_id"
                                  baseTableName="songs"
-                                 constraintName="fk_songs_album_id"
+                                 constraintName="fk_songs_Album_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="albums"/>
+                                 referencedTableName="Album"/>
 
         <addForeignKeyConstraint baseColumnNames="list_details_id"
                                  baseTableName="songs"

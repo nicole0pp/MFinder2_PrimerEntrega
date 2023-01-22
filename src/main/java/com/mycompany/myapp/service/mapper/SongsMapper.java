@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Songs} and its DTO {@link SongsDTO}.
  */
-@Mapper(componentModel = "spring", uses = {MusicGenresMapper.class, AlbumsMapper.class, ListDetailsMapper.class})
+@Mapper(componentModel = "spring", uses = {MusicGenreMapper.class, AlbumMapper.class, ListDetailsMapper.class})
 public interface SongsMapper extends EntityMapper<SongsDTO, Songs> {
 
     @Mapping(source = "musicGenre.id", target = "musicGenreId")

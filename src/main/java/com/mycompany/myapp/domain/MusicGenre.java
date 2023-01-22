@@ -11,12 +11,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A MusicGenres.
+ * A MusicGenre.
  */
 @Entity
 @Table(name = "music_genres")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class MusicGenres implements Serializable {
+public class MusicGenre implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -44,7 +44,7 @@ public class MusicGenres implements Serializable {
         return name;
     }
 
-    public MusicGenres name(String name) {
+    public MusicGenre name(String name) {
         this.name = name;
         return this;
     }
@@ -57,7 +57,7 @@ public class MusicGenres implements Serializable {
         return type;
     }
 
-    public MusicGenres type(String type) {
+    public MusicGenre type(String type) {
         this.type = type;
         return this;
     }
@@ -72,10 +72,10 @@ public class MusicGenres implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof MusicGenres)) {
+        if (!(o instanceof MusicGenre)) {
             return false;
         }
-        return id != null && id.equals(((MusicGenres) o).id);
+        return id != null && id.equals(((MusicGenre) o).id);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class MusicGenres implements Serializable {
 
     @Override
     public String toString() {
-        return "MusicGenres{" +
+        return "MusicGenre{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +

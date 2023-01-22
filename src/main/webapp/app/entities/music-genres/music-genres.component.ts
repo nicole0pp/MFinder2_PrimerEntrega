@@ -5,19 +5,19 @@ import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { IMusicGenres } from 'app/shared/model/music-genres.model';
+import { IMusicGenre } from 'app/shared/model/music-genres.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { MusicGenresService } from './music-genres.service';
+import { MusicGenreService } from './music-genres.service';
 
 @Component({
   selector: 'jhi-music-genres',
   templateUrl: './music-genres.component.html'
 })
-export class MusicGenresComponent implements OnInit, OnDestroy {
+export class MusicGenreComponent implements OnInit, OnDestroy {
   currentAccount: any;
-  musicGenres: IMusicGenres[];
+  MusicGenre: IMusicGenre[];
   error: any;
   success: any;
   eventSubscriber: Subscription;
@@ -31,7 +31,7 @@ export class MusicGenresComponent implements OnInit, OnDestroy {
   reverse: any;
 
   constructor(
-    protected musicGenresService: MusicGenresService,
+    protected MusicGenreService: MusicGenreService,
     protected parseLinks: JhiParseLinks,
     protected jhiAlertService: JhiAlertService,
     protected accountService: AccountService,
@@ -49,16 +49,14 @@ export class MusicGenresComponent implements OnInit, OnDestroy {
   }
 
   loadAll() {
-    this.musicGenresService
-      .query({
-        page: this.page - 1,
-        size: this.itemsPerPage,
-        sort: this.sort()
-      })
-      .subscribe(
-        (res: HttpResponse<IMusicGenres[]>) => this.paginateMusicGenres(res.body, res.headers),
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
+    this.MusicGenreService.query({
+      page: this.page - 1,
+      size: this.itemsPerPage,
+      sort: this.sort()
+    }).subscribe(
+      (res: HttpResponse<IMusicGenre[]>) => this.paginateMusicGenre(res.body, res.headers),
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   loadPage(page: number) {
@@ -96,19 +94,19 @@ export class MusicGenresComponent implements OnInit, OnDestroy {
     this.accountService.identity().then(account => {
       this.currentAccount = account;
     });
-    this.registerChangeInMusicGenres();
+    this.registerChangeInMusicGenre();
   }
 
   ngOnDestroy() {
     this.eventManager.destroy(this.eventSubscriber);
   }
 
-  trackId(index: number, item: IMusicGenres) {
+  trackId(index: number, item: IMusicGenre) {
     return item.id;
   }
 
-  registerChangeInMusicGenres() {
-    this.eventSubscriber = this.eventManager.subscribe('musicGenresListModification', response => this.loadAll());
+  registerChangeInMusicGenre() {
+    this.eventSubscriber = this.eventManager.subscribe('MusicGenreListModification', response => this.loadAll());
   }
 
   sort() {
@@ -119,10 +117,10 @@ export class MusicGenresComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  protected paginateMusicGenres(data: IMusicGenres[], headers: HttpHeaders) {
+  protected paginateMusicGenre(data: IMusicGenre[], headers: HttpHeaders) {
     this.links = this.parseLinks.parse(headers.get('link'));
     this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
-    this.musicGenres = data;
+    this.MusicGenre = data;
   }
 
   protected onError(errorMessage: string) {

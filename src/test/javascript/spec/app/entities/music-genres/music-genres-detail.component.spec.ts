@@ -4,24 +4,24 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { MFinder2TestModule } from '../../../test.module';
-import { MusicGenresDetailComponent } from 'app/entities/music-genres/music-genres-detail.component';
-import { MusicGenres } from 'app/shared/model/music-genres.model';
+import { MusicGenreDetailComponent } from 'app/entities/music-genres/music-genres-detail.component';
+import { MusicGenre } from 'app/shared/model/music-genres.model';
 
 describe('Component Tests', () => {
-  describe('MusicGenres Management Detail Component', () => {
-    let comp: MusicGenresDetailComponent;
-    let fixture: ComponentFixture<MusicGenresDetailComponent>;
-    const route = ({ data: of({ musicGenres: new MusicGenres(123) }) } as any) as ActivatedRoute;
+  describe('MusicGenre Management Detail Component', () => {
+    let comp: MusicGenreDetailComponent;
+    let fixture: ComponentFixture<MusicGenreDetailComponent>;
+    const route = ({ data: of({ MusicGenre: new MusicGenre(123) }) } as any) as ActivatedRoute;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MFinder2TestModule],
-        declarations: [MusicGenresDetailComponent],
+        declarations: [MusicGenreDetailComponent],
         providers: [{ provide: ActivatedRoute, useValue: route }]
       })
-        .overrideTemplate(MusicGenresDetailComponent, '')
+        .overrideTemplate(MusicGenreDetailComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(MusicGenresDetailComponent);
+      fixture = TestBed.createComponent(MusicGenreDetailComponent);
       comp = fixture.componentInstance;
     });
 
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         // THEN
-        expect(comp.musicGenres).toEqual(jasmine.objectContaining({ id: 123 }));
+        expect(comp.MusicGenre).toEqual(jasmine.objectContaining({ id: 123 }));
       });
     });
   });

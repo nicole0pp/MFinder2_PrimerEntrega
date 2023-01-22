@@ -1,5 +1,5 @@
 {
-    "name": "Albums",
+    "name": "Album",
     "fields": [
         {
             "fieldName": "name",
@@ -21,7 +21,7 @@
     "relationships": [],
     "changelogDate": "20230113162104",
     "javadoc": "not an ignored comment",
-    "entityTableName": "albums",
+    "entityTableName": "Album",
     "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",
