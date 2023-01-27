@@ -16,6 +16,7 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="artistic_name"><span jhiTranslate="mFinder2App.artist.artistic_name">Artistic Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="artistic_name"><span >Usuario</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -23,6 +24,7 @@
             <tr *ngFor="let artist of artists ;trackBy: trackId">
                 <td><a [routerLink]="['/artist', artist.id, 'view' ]">{{artist.id}}</a></td>
                 <td>{{artist.artistic_name}}</td>
+                <td>{{artist.user_artist_id}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

@@ -4,6 +4,8 @@ package com.mycompany.myapp.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -27,15 +29,18 @@ public class Artist implements Serializable {
     @Column(name = "artistic_name", nullable = false, unique = true)
     private String artistic_name;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
-
     @OneToOne
     @JoinColumn(unique=true)
     private User user;
 
+    @ManyToOne
+    @JsonIgnoreProperties("album")
+    private Album Album;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public Long getId() {
+        return id;
+    }
     public void setId(Long id) {
         this.id = id;
     }
@@ -51,6 +56,32 @@ public class Artist implements Serializable {
 
     public void setArtistic_name(String artistic_name) {
         this.artistic_name = artistic_name;
+    }
+    
+
+    public User getUser(){
+        return user;
+    }
+    public Artist user(User user){
+        this.user=user;
+        return this;
+    }
+    public void setUser(User user){
+        this.user=user;
+    }
+
+
+    public Album getAlbum() {
+        return Album;
+    }
+
+    public Artist Album(Album Album) {
+        this.Album = Album;
+        return this;
+    }
+
+    public void setAlbum(Album Album) {
+        this.Album = Album;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -74,7 +105,9 @@ public class Artist implements Serializable {
     public String toString() {
         return "Artist{" +
             "id=" + getId() +
-            ", artistic_name='" + getArtistic_name() + "'" +
+            ", artistic_name='" + getArtistic_name() + ", user_artist_id='" + getUser() +
+            ", album='" + getAlbum() +
+            "'" +
             "}";
     }
 }

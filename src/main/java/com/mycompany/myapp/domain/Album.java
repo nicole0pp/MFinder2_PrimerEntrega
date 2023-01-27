@@ -39,6 +39,10 @@ public class Album implements Serializable {
     @Column(name = "publication_date")
     private LocalDate publicationDate;
 
+    // @ManyToOne
+    // @JsonIgnoreProperties("Song")
+    // private Album Album;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;

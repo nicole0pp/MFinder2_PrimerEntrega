@@ -25,8 +25,8 @@ public class SongDTO implements Serializable {
     private byte[] audio;
 
     private String audioContentType;
-    private String artists;
 
+    private String artist;
 
     private Long musicGenreId;
 
@@ -90,12 +90,12 @@ public class SongDTO implements Serializable {
         this.audioContentType = audioContentType;
     }
 
-    public String getArtists() {
-        return artists;
+    public String getArtist() {
+        return artist;
     }
 
-    public void setArtists(String artists) {
-        this.artists = artists;
+    public void setArtists(String artist) {
+        this.artist = artist;
     }
 
     public Long getMusicGenreId() {
@@ -151,7 +151,7 @@ public class SongDTO implements Serializable {
             ", picture='" + getPicture() + "'" +
             ", duration='" + getDuration() + "'" +
             ", audio='" + getAudio() + "'" +
-            ", artists='" + getArtists() + "'" +
+            ", artists='" + getArtist() + "'" +
             ", musicGenre=" + getMusicGenreId() +
             ", Album=" + getAlbumId() +
             ", listDetails=" + getListDetailsId() +

@@ -56,10 +56,6 @@ public class Song implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("Song")
-    private Album Album;
-
-    @ManyToOne
-    @JsonIgnoreProperties("Song")
     private ListDetails listDetails;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -173,19 +169,6 @@ public class Song implements Serializable {
 
     public void setMusicGenre(MusicGenre MusicGenre) {
         this.musicGenre = MusicGenre;
-    }
-
-    public Album getAlbum() {
-        return Album;
-    }
-
-    public Song Album(Album Album) {
-        this.Album = Album;
-        return this;
-    }
-
-    public void setAlbum(Album Album) {
-        this.Album = Album;
     }
 
     public ListDetails getListDetails() {
